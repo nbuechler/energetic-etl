@@ -16,5 +16,3 @@ from bson import json_util
 
 # date
 import datetime
-
-load = Blueprint('load', __name__)

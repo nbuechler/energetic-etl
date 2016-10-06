@@ -16,5 +16,3 @@ from bson import json_util
 
 # date
 import datetime
-
-transform = Blueprint('transform', __name__)
