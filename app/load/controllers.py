@@ -17,23 +17,10 @@ from bson import json_util
 # date
 import datetime
 
-# Create constraints
-'''
-This method creates constrains
-'''
-@intercepts.route('/mongo2neo/intercepts_create_constraint')
-def intercepts_create_constraint():
-    # secure_graph1.schema.create_uniqueness_constraint("Word", "name")
-    return 'success'
-
-# Drop constraints
-'''
-This method drops constrains
-'''
-@intercepts.route('/mongo2neo/intercepts_drop_constraint')
-def intercepts_drop_constraint():
-    # secure_graph1.schema.drop_uniqueness_constraint("Word", "name")
-    return 'success'
+from transform.controllers import (cnr_user_did_activity,
+                                   cnr_user_experienced_experience,
+                                   cnr_user_logged_log,
+                                   cnr_log_contains_sub)
 
 # Move a user and some relationship to the neo4j database
 ## A word_length is the number of words in the descriptionArrayLength
@@ -46,8 +33,7 @@ To find a user node:
 MATCH (u:User {user_id: "56db97954eca34d01404888a"}) RETURN u
 
 '''
-@intercepts.route('/mongo2neo/intercepts_create_single_activity/<activity>', methods=['POST'])
-def intercepts_create_single_activity(activity=None):
+def create_single_activity(activity=None):
 
     cypher = secure_graph1.cypher
 
@@ -77,8 +63,7 @@ def intercepts_create_single_activity(activity=None):
 '''
 This method UPDATES a single activity node from neo4j
 '''
-@intercepts.route('/mongo2neo/intercepts_update_single_activity/<activity>', methods=['PUT'])
-def intercepts_update_single_activity(activity=None):
+def update_single_activity(activity=None):
     print '====update single activity node===='
     print activity
 
@@ -109,8 +94,7 @@ def intercepts_update_single_activity(activity=None):
 '''
 This method DESTROYS a single activity node from neo4j
 '''
-@intercepts.route('/mongo2neo/intercepts_destroy_single_activity/<activity>', methods=['DELETE'])
-def intercepts_destroy_single_activity(activity=None):
+def destroy_single_activity(activity=None):
     print '====destroy single activity node===='
     print activity
 
@@ -121,8 +105,7 @@ def intercepts_destroy_single_activity(activity=None):
 '''
 This method CREATES a single experience node from neo4j
 '''
-@intercepts.route('/mongo2neo/intercepts_create_single_experience/<experience>', methods=['POST'])
-def intercepts_create_single_experience(experience=None):
+def create_single_experience(experience=None):
     print '====create single experience node===='
 
     cypher = secure_graph1.cypher
@@ -165,8 +148,7 @@ def intercepts_create_single_experience(experience=None):
 '''
 This method UPDATES a single experience node from neo4j
 '''
-@intercepts.route('/mongo2neo/intercepts_update_single_experience/<experience>', methods=['PUT'])
-def intercepts_update_single_experience(experience=None):
+def update_single_experience(experience=None):
 
     print '====update single experience node===='
 
@@ -210,8 +192,7 @@ def intercepts_update_single_experience(experience=None):
 '''
 This method DESTROYS a single experience node from neo4j
 '''
-@intercepts.route('/mongo2neo/intercepts_destroy_single_experience/<experience>', methods=['DELETE'])
-def intercepts_destroy_single_experience(experience=None):
+def destroy_single_experience(experience=None):
     print '====destroy single experience node===='
     print experience
 
@@ -222,8 +203,7 @@ def intercepts_destroy_single_experience(experience=None):
 '''
 This method CREATES a single log node from neo4j
 '''
-@intercepts.route('/mongo2neo/intercepts_create_single_log/<log>', methods=['POST'])
-def intercepts_create_single_log(log=None):
+def create_single_log(log=None):
     print '====create single log node===='
 
     cypher = secure_graph1.cypher
@@ -280,8 +260,7 @@ def intercepts_create_single_log(log=None):
 '''
 This method UPDATES a single log node from neo4j
 '''
-@intercepts.route('/mongo2neo/intercepts_update_single_log/<log>', methods=['PUT'])
-def intercepts_update_single_log(log=None):
+def update_single_log(log=None):
     print '====update single log node===='
 
     cypher = secure_graph1.cypher
@@ -333,8 +312,7 @@ def intercepts_update_single_log(log=None):
 '''
 This method DESTROYS a single log node from neo4j
 '''
-@intercepts.route('/mongo2neo/intercepts_destroy_single_log/<log>', methods=['DELETE'])
-def intercepts_destroy_single_log(log=None):
+def destroy_single_log(log=None):
     print '====destroy single log node===='
     print log
 
@@ -348,8 +326,27 @@ This method only deletes all the records.
 It relies on there being a mongo database. **VERY IMPORTANT**
 '''
 
-@intercepts.route('/mongo2neo/intercepts_create_records')
-def intercepts_create_records():
+def delete_records():
+    # Clear the database
+    secure_graph1.delete_all()
+    return 'success'
+
+
+'''
+This method deletes all the records then adds all relationships and nodes.
+It relies on there being a mongo database. **VERY IMPORTANT**
+
+Here are useful queries to find all the records for a user for a given node attr:
+
+--Find all the nodes that are words with a name of name 'spoken' by a user with an email address of email--
+MATCH (n:User {email: "<email>"})-[r:SPOKE]-(a:Word {name: "<name>"}) return a
+
+--Find all the distinct nodes that are 'spoken' by a user--
+MATCH (n:User)-[r:SPOKE]-(a) return DISTINCT a
+
+'''
+
+def create_records():
 
     # Clear the database
     secure_graph1.delete_all()
@@ -447,28 +444,6 @@ def intercepts_create_records():
 
     return 'success'
 
-@intercepts.route('/mongo2neo/intercepts_delete_records')
-def intercepts_delete_records():
-
-    # Clear the database
-    secure_graph1.delete_all()
-
-    return 'success'
-
-'''
-This method deletes all the records then adds all relationships and nodes.
-It relies on there being a mongo database. **VERY IMPORTANT**
-
-Here are useful queries to find all the records for a user for a given node attr:
-
---Find all the nodes that are words with a name of name 'spoken' by a user with an email address of email--
-MATCH (n:User {email: "<email>"})-[r:SPOKE]-(a:Word {name: "<name>"}) return a
-
---Find all the distinct nodes that are 'spoken' by a user--
-MATCH (n:User)-[r:SPOKE]-(a) return DISTINCT a
-
-'''
-
 # Move an event - as a year, month, or day - and some relationship to the neo4j database
 '''
 The whole point of running this step is to store this information as a data warehouse
@@ -493,20 +468,14 @@ To find all nodes in a month (event):
 To find all nodes in a day (event):
   MATCH (n:Log) where n.year = 2016 and n.month = 1 and n.day = 6 RETURN (n)
 '''
-@intercepts.route('/mongo2neo/intercepts_create_event_supplement')
-def intercepts_create_event_supplement():
+
+def create_event_supplement():
     # Create events with the following attributes...
     # logCount, highestValue, totals for each category, winningCategoryName
     cypher = secure_graph1.cypher
-
-    # TODO: Make this method execute differently if there is a user_id
-    # For example, if a user_id, make it so that user has updated event nodes
-    # All distinct events for each give user
     for event_record in cypher.execute("MATCH (u)-[r:LOGGED]->(n:Log) RETURN DISTINCT n.year, n.month, n.day, u.user_id"):
         sums = cypher.execute("MATCH (u)-[r:LOGGED]->(n:Log) where n.year = " + str(event_record[0]) + " and n.month = " + str(event_record[1]) + " and n.day = " + str(event_record[2]) + " and u.user_id = '" + event_record[3] + "' " +
                               "RETURN sum(n.physicArrayLength), sum(n.emotionArrayLength), sum(n.academicArrayLength), sum(n.communeArrayLength), sum(n.etherArrayLength), u.user_id, count(n)")[0]
-
-
         # Find the position of the max values in the list
         winningIndexes = []
 
