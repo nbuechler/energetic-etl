@@ -9,18 +9,18 @@ extract = Blueprint('extract', __name__)
 def default():
     return 'Hello extract!'
 
-@extract.route('/nodes/user/<user_id>')
+@extract.route('/nodes/users/<user_id>')
 def get_user_node(user_id=None):
-    return get_user_node(user_id=None)
+    return jsonify(dict(controllers.get_user_node(user_id=user_id).properties))
 
-@extract.route('/nodes/activity/<activity_id>')
+@extract.route('/nodes/activities/<activity_id>')
 def get_activity_node(activity_id=None):
-    return get_activity_node(activity_id=None)
+    return jsonify(dict(controllers.get_activity_node(activity_id=activity_id).properties))
 
-@extract.route('/nodes/experience/<experience_id>')
+@extract.route('/nodes/experiences/<experience_id>')
 def get_experience_node(experience_id=None):
-    return get_experience_node(experience_id=None)
+    return jsonify(dict(controllers.get_experience_node(experience_id=experience_id).properties))
 
-@extract.route('/nodes/log/<log_id>')
+@extract.route('/nodes/logs/<log_id>')
 def get_log_node(log_id=None):
-    return get_log_node(log_id=None)
+    return jsonify(dict(controllers.get_log_node(log_id=log_id).properties))
