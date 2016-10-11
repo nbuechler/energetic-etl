@@ -12,15 +12,15 @@ def default():
 '''
 Activities
 '''
-@load.route('/create/activity/<activity>', methods=['POST'])
+@load.route('/activity/<activity>', methods=['POST'])
 def create_activity(activity=None):
     return controllers.create_single_activity(activity=activity)
 
-@load.route('/update/activity/<activity>', methods=['PUT'])
+@load.route('/activity/<activity>', methods=['PUT'])
 def update_activity(activity=None):
     return controllers.update_single_activity(activity=activity)
 
-@load.route('/destroy/activity/<activity>', methods=['DELETE'])
+@load.route('/activity/<activity>', methods=['DELETE'])
 def destroy_activity(activity=None):
     print 'here'
     return controllers.destroy_single_activity(activity=activity)
@@ -28,30 +28,30 @@ def destroy_activity(activity=None):
 '''
 Experiences
 '''
-@load.route('/create/experience/<experience>', methods=['POST'])
+@load.route('/experience/<experience>', methods=['POST'])
 def create_experience(experience=None):
     return controllers.create_single_experience(experience=experience)
 
-@load.route('/update/experience/<experience>', methods=['PUT'])
+@load.route('/experience/<experience>', methods=['PUT'])
 def update_experience(experience=None):
     return controllers.update_single_experience(experience=experience)
 
-@load.route('/destroy/experience/<experience>', methods=['DELETE'])
+@load.route('/experience/<experience>', methods=['DELETE'])
 def destroy_experience(experience=None):
     return controllers.destroy_single_experience(experience=experience)
 
 '''
 Logs
 '''
-@load.route('/create/log/<log>', methods=['POST'])
+@load.route('/log/<log>', methods=['POST'])
 def create_log(log=None):
     return controllers.create_single_log(log=log)
 
-@load.route('/update/log/<log>', methods=['PUT'])
+@load.route('/log/<log>', methods=['PUT'])
 def update_log(log=None):
     return controllers.update_single_log(log=log)
 
-@load.route('/destroy/log/<log>', methods=['DELETE'])
+@load.route('/log/<log>', methods=['DELETE'])
 def destroy_log(log=None):
     return controllers.destroy_single_log(log=log)
 
