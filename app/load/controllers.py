@@ -17,10 +17,18 @@ from bson import json_util
 # date
 import datetime
 
+from extract.controllers import (get_user_node,
+                                   get_activity_node,
+                                   get_experience_node,
+                                   get_log_node)
+
 from transform.controllers import (cnr_user_did_activity,
                                    cnr_user_experienced_experience,
                                    cnr_user_logged_log,
-                                   cnr_log_contains_sub)
+                                   cnr_log_contains_sub,
+                                   update_activity_node,
+                                   update_experience_node,
+                                   update_log_node)
 
 # Move a user and some relationship to the neo4j database
 ## A word_length is the number of words in the descriptionArrayLength

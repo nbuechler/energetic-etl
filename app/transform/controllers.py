@@ -17,6 +17,11 @@ from bson import json_util
 # date
 import datetime
 
+from extract.controllers import (get_user_node,
+                                   get_activity_node,
+                                   get_experience_node,
+                                   get_log_node)
+
 '''
 Helper functions - Create new User/Activity Relationship
 cnr --> create new relationship

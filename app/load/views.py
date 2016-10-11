@@ -12,47 +12,48 @@ def default():
 '''
 Activities
 '''
-@load.route('/create_single_activity/<activity>', methods=['POST'])
-def create_single_activity(activity=None):
-    return controllers.create_single_activity(activity=None)
+@load.route('/activity/<activity>', methods=['POST'])
+def create_activity(activity=None):
+    return controllers.create_single_activity(activity=activity)
 
-@load.route('/update_single_activity/<activity>', methods=['PUT'])
-def update_single_activity(activity=None):
-    return controllers.update_single_activity(activity=None)
+@load.route('/activity/<activity>', methods=['PUT'])
+def update_activity(activity=None):
+    return controllers.update_single_activity(activity=activity)
 
-@load.route('/destroy_single_activity/<activity>', methods=['DELETE'])
-def destroy_single_activity(activity=None):
-    return controllers.destroy_single_activity(activity=None)
+@load.route('/activity/<activity>', methods=['DELETE'])
+def destroy_activity(activity=None):
+    print 'here'
+    return controllers.destroy_single_activity(activity=activity)
 
 '''
 Experiences
 '''
-@load.route('/create_single_experience/<experience>', methods=['POST'])
-def create_single_experience(experience=None):
-    return controllers.create_single_experience(experience=None)
+@load.route('/experience/<experience>', methods=['POST'])
+def create_experience(experience=None):
+    return controllers.create_single_experience(experience=experience)
 
-@load.route('/update_single_experience/<experience>', methods=['PUT'])
-def update_single_experience(experience=None):
-    return controllers.update_single_experience(experience=None)
+@load.route('/experience/<experience>', methods=['PUT'])
+def update_experience(experience=None):
+    return controllers.update_single_experience(experience=experience)
 
-@load.route('/destroy_single_experience/<experience>', methods=['DELETE'])
-def destroy_single_experience(experience=None):
-    return controllers.destroy_single_experience(experience=None)
+@load.route('/experience/<experience>', methods=['DELETE'])
+def destroy_experience(experience=None):
+    return controllers.destroy_single_experience(experience=experience)
 
 '''
 Logs
 '''
-@load.route('/create_single_log/<log>', methods=['POST'])
-def create_single_log(log=None):
-    return controllers.create_single_log(log=None)
+@load.route('/log/<log>', methods=['POST'])
+def create_log(log=None):
+    return controllers.create_single_log(log=log)
 
-@load.route('/update_single_log/<log>', methods=['PUT'])
-def update_single_log(log=None):
-    return controllers.update_single_log(log=None)
+@load.route('/log/<log>', methods=['PUT'])
+def update_log(log=None):
+    return controllers.update_single_log(log=log)
 
-@load.route('/destroy_single_log/<log>', methods=['DELETE'])
-def destroy_single_log(log=None):
-    return controllers.destroy_single_log(log=None)
+@load.route('/log/<log>', methods=['DELETE'])
+def destroy_log(log=None):
+    return controllers.destroy_single_log(log=log)
 
 '''
 General Record Keeping
