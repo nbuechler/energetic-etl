@@ -2,7 +2,13 @@ from flask import Blueprint
 from flask import render_template, redirect, url_for, jsonify
 
 #databases
-from config.databases import mongo1, mongo2, mongo3, remoteDB1, secure_graph1
+from config.databases import (mongo1,
+                              mongo2,
+                              mongo3,
+                              affect_corpus,
+                              affect_corpus_synopsis,
+                              remoteDB1,
+                              secure_graph1)
 
 # mongo dependecies
 from flask.ext.pymongo import ObjectId
