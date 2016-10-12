@@ -124,3 +124,17 @@ def get_log_node(log_id=None):
     log_node = log_node_list[0][0]
 
     return log_node
+
+'''
+Get an order for an R-EMOTION
+Takes two paramaters
+1) the name of the emotion: emotion
+2) the order number: order-num
+Returns an order
+'''
+def get_rep_emotion_order(emotion=None, order_num=None):
+    print affect_corpus_synopsis
+    order = affect_corpus_synopsis.db['lingustic-affects'].find_one({'word': emotion})['order-' + str(order_num)]
+    print order
+
+    return {'status': 'success', 'result': order}
