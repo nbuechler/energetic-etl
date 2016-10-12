@@ -2,7 +2,13 @@ from flask import Blueprint
 from flask import render_template, redirect, url_for, jsonify
 
 #databases
-from config.databases import mongo1, mongo2, mongo3, remoteDB1, secure_graph1
+from config.databases import (mongo1,
+                              mongo2,
+                              mongo3,
+                              affect_corpus,
+                              affect_corpus_synopsis,
+                              remoteDB1,
+                              secure_graph1)
 
 # mongo dependecies
 from flask.ext.pymongo import ObjectId
@@ -369,6 +375,7 @@ def create_records():
         user_dict = json.loads(json_user)
 
         # Create a bunch of user nodes
+        # TODO: Make a model for this and use that.
         new_user_node = Node("User",
             email=user_dict.get('email'),
             user_id=user_dict.get('_id').get('$oid'),
@@ -388,6 +395,7 @@ def create_records():
             activity_dict = json.loads(json_activity)
 
             # Output is a new_activity_node
+            # TODO: Make a model for this and use that.
             new_activity_node = cnr_user_did_activity(
                 new_user_node=new_user_node,
                 activity_dict=activity_dict
@@ -406,6 +414,7 @@ def create_records():
                 experience_dict = json.loads(json_experience)
 
                 # Output is a new_experience_node
+                # TODO: Make a model for this and use that.
                 new_experience_node = cnr_user_experienced_experience(
                     new_user_node=new_user_node,
                     experience_dict=experience_dict
@@ -427,6 +436,7 @@ def create_records():
                     # Create a new python dictionary from the json_experience, we'll call it log_dict
                     log_dict = json.loads(json_log)
 
+                    # TODO: Make a model for this and use that.
                     new_log_node = cnr_user_logged_log(
                         new_user_node=new_user_node,
                         log_dict=log_dict,
@@ -494,6 +504,7 @@ def create_event_supplement():
             if s >= max_value:
                 winningIndexes.append(idx)
 
+        # TODO: Make a model for this and use that.
         new_event_node = Node("Event",
             user = sums[5],
             ymd=str(event_record[0]) + '-' + str(event_record[1]) + '-' + str(event_record[2]),

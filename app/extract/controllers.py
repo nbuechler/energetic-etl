@@ -2,7 +2,13 @@ from flask import Blueprint
 from flask import render_template, redirect, url_for, jsonify
 
 #databases
-from config.databases import mongo1, mongo2, mongo3, remoteDB1, secure_graph1
+from config.databases import (mongo1,
+                              mongo2,
+                              mongo3,
+                              affect_corpus,
+                              affect_corpus_synopsis,
+                              remoteDB1,
+                              secure_graph1)
 
 # mongo dependecies
 from flask.ext.pymongo import ObjectId
@@ -118,3 +124,17 @@ def get_log_node(log_id=None):
     log_node = log_node_list[0][0]
 
     return log_node
+
+'''
+Get an order for an R-EMOTION
+Takes two paramaters
+1) the name of the emotion: emotion
+2) the order number: order-num
+Returns an order
+'''
+def get_rep_emotion_order(emotion=None, order_num=None):
+    print affect_corpus_synopsis
+    order = affect_corpus_synopsis.db['lingustic-affects'].find_one({'word': emotion})['order-' + str(order_num)]
+    print order
+
+    return {'status': 'success', 'result': order}
