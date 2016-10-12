@@ -36,3 +36,17 @@ Affect
 @extract.route('/affect/<emotion>/order/<order_num>')
 def get_rep_affect_order(emotion=None, order_num=None):
     return jsonify(controllers.get_rep_emotion_order(emotion=emotion, order_num=order_num))
+
+@extract.route('/affect/<emotion>/order/all')
+def get_rep_affect_all(emotion=None, order_num=None):
+    order_1 = controllers.get_rep_emotion_order(emotion=emotion, order_num=1)['result']
+    order_2 = controllers.get_rep_emotion_order(emotion=emotion, order_num=2)['result']
+    order_3 = controllers.get_rep_emotion_order(emotion=emotion, order_num=3)['result']
+    return jsonify(
+            {
+            'status': 'success',
+            'order_1': order_1,
+            'order_2': order_2,
+            'order_3': order_3,
+            }
+        )

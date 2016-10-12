@@ -133,8 +133,6 @@ Takes two paramaters
 Returns an order
 '''
 def get_rep_emotion_order(emotion=None, order_num=None):
-    print affect_corpus_synopsis
     order = affect_corpus_synopsis.db['lingustic-affects'].find_one({'word': emotion})['order-' + str(order_num)]
-    print order
 
     return {'status': 'success', 'result': order}
