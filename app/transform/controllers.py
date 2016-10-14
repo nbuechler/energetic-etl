@@ -337,3 +337,15 @@ def cnr_user_described_sublog(new_user_node=None, new_log_node=None, log_dict=No
     secure_graph1.create(user_described_sublog)
 
     return new_sub_log_node
+
+'''
+Transform word to node
+A word in this case is an affect's synonym
+'''
+def transform_affect_word(affect=None, word=None):
+    new_affect_word_node = Node(
+        affect=affect
+        word=word,
+    )
+
+    return new_affect_word_node
