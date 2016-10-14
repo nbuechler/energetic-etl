@@ -339,12 +339,29 @@ def cnr_user_described_sublog(new_user_node=None, new_log_node=None, log_dict=No
     return new_sub_log_node
 
 '''
+Transform an affect dictionary
+Returns a new_affect_node
+'''
+def transform_affect_dictionary(affect_dict=None, affect=affect):
+    new_affect_node = Node(
+        "Word",
+        affect=affect,
+        order1Length=len(affect_dict.get('order_1')),
+        order2Length=len(affect_dict.get('order_2')),
+        order3Length=len(affect_dict.get('order_3')),
+    )
+    
+    return new_affect_node
+
+'''
 Transform word to node
 A word in this case is an affect's synonym
+Returns a new_affect_word_node
 '''
 def transform_affect_word(affect=None, word=None):
     new_affect_word_node = Node(
-        affect=affect
+        "Word",
+        affect=affect,
         word=word,
     )
 
