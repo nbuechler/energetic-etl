@@ -59,6 +59,7 @@ def destroy_log(log=None):
 '''
 Emotion
 '''
+# This loads the corpus data from mongo to neo4j
 @load.route('/create_single_rEmotion_corpus/<rEmotion>', methods=['POST'])
 def create_rEmotion_corpus(rEmotion=None):
     return controllers.create_single_rEmotion_corpus(rEmotion=rEmotion)

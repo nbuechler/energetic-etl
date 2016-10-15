@@ -359,7 +359,7 @@ A word in this case is an rEmotion's synonym
 Returns a new_rEmotion_node
 '''
 def transform_rEmotion_word(rEmotion=None, word=None, order=None):
-    new_rEmotion_node = Node(
+    new_rEmotion_word_node = Node(
         "Word",
         rEmotion=rEmotion,
         word=word,

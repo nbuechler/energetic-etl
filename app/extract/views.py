@@ -33,18 +33,18 @@ Emotion
 '''
 # TODO: Think about extending this out
 # (remember that transforming the response happens in the transforming area of the code)
-@extract.route('/emotion/<emotion>/order/<order_num>')
-def get_rep_emotion_order(emotion=None, order_num=None):
-    return jsonify(controllers.get_rep_emotion_order(emotion=emotion, order_num=order_num))
+@extract.route('/emotion/<rEmotion>/order/<order_num>')
+def get_rep_emotion_order(rEmotion=None, order_num=None):
+    return jsonify(controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=order_num))
 
-@extract.route('/emotion/<emotion>/order/all')
-def get_rep_emotion_all(emotion=None, order_num=None):
-    order_1 = controllers.get_rep_emotion_order(emotion=emotion, order_num=1)['result']
-    order_2 = controllers.get_rep_emotion_order(emotion=emotion, order_num=2)['result']
-    order_3 = controllers.get_rep_emotion_order(emotion=emotion, order_num=3)['result']
+@extract.route('/emotion/<rEmotion>/order/all')
+def get_rep_emotion_all(rEmotion=None, order_num=None):
+    order_1 = controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=1)['result']
+    order_2 = controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=2)['result']
+    order_3 = controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=3)['result']
     return jsonify(
             {
-            'rEmotion': emotion,
+            'rEmotion': rEmotion,
             'status': 'success',
             'order_1': order_1,
             'order_2': order_2,
