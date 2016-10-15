@@ -26,7 +26,8 @@ import datetime
 from extract.controllers import (get_user_node,
                                    get_activity_node,
                                    get_experience_node,
-                                   get_log_node)
+                                   get_log_node,
+                                   get_rep_emotion_order)
 
 from transform.controllers import (cnr_user_did_activity,
                                    cnr_user_experienced_experience,
@@ -34,7 +35,9 @@ from transform.controllers import (cnr_user_did_activity,
                                    cnr_log_contains_sub,
                                    update_activity_node,
                                    update_experience_node,
-                                   update_log_node)
+                                   update_log_node,
+                                   transform_affect_dictionary,
+                                   transform_rEmotion_word)
 
 # Move a user and some relationship to the neo4j database
 ## A word_length is the number of words in the descriptionArrayLength
@@ -331,6 +334,45 @@ def destroy_single_log(log=None):
     print log
 
     # TODO: Figure how to implement this delete correctly
+
+    return 'success'
+
+
+'''
+This method CREATES an rEmotion node and relates it to the rEmotion-words is has in it's corpus
+'''
+def create_single_rEmotion_corpus(rEmotion=None):
+    print rEmotion
+
+    order_1 = get_rep_emotion_order(rEmotion=rEmotion, order_num=1)['result']
+    order_2 = get_rep_emotion_order(rEmotion=rEmotion, order_num=2)['result']
+    order_3 = get_rep_emotion_order(rEmotion=rEmotion, order_num=3)['result']
+    order = get_rep_emotion_order(rEmotion=rEmotion, order_num=value)['result']
+
+    affect_dict = {
+                  'rEmotion': rEmotion,
+                  'order_1': order_1,
+                  'order_2': order_2,
+                  'order_3': order_3,
+                  }
+
+    rEmotion_node = transform_affect_dictionary(affect_dict=affect_dict, rEmotion=rEmotion)
+
+    for word in order_1:
+        rEmotion_word_node = transform_rEmotion_word(rEmotion=None, word=None, order=1)
+        cnr_rEmotion_synonymized_by_rEmotion_word(
+            rEmotion_node=rEmotion_node, rEmotion_word_node=rEmotion_word_node
+            )
+    for word in order_2:
+        rEmotion_word_node = transform_rEmotion_word(rEmotion=None, word=None, order=2)
+        cnr_rEmotion_synonymized_by_rEmotion_word(
+            rEmotion_node=rEmotion_node, rEmotion_word_node=rEmotion_word_node
+            )
+    for word in order_3:
+        rEmotion_word_node = transform_rEmotion_word(rEmotion=None, word=None, order=3)
+        cnr_rEmotion_synonymized_by_rEmotion_word(
+            rEmotion_node=rEmotion_node, rEmotion_word_node=rEmotion_word_node
+            )
 
     return 'success'
 

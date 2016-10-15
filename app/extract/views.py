@@ -44,6 +44,7 @@ def get_rep_affect_all(emotion=None, order_num=None):
     order_3 = controllers.get_rep_emotion_order(emotion=emotion, order_num=3)['result']
     return jsonify(
             {
+            'rEmotion': emotion,
             'status': 'success',
             'order_1': order_1,
             'order_2': order_2,
