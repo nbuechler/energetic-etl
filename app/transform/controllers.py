@@ -340,29 +340,45 @@ def cnr_user_described_sublog(new_user_node=None, new_log_node=None, log_dict=No
 
 '''
 Transform an affect dictionary
-Returns a new_affect_node
+Returns a new_rEmotion_node
 '''
-def transform_affect_dictionary(affect_dict=None, affect=affect):
-    new_affect_node = Node(
-        "Word",
-        affect=affect,
+def transform_affect_dictionary(affect_dict=None, rEmotion=None):
+    new_rEmotion_node = Node(
+        "rEmotion",
+        rEmotion=rEmotion,
         order1Length=len(affect_dict.get('order_1')),
         order2Length=len(affect_dict.get('order_2')),
         order3Length=len(affect_dict.get('order_3')),
     )
-    
-    return new_affect_node
+
+    return new_rEmotion_node
 
 '''
 Transform word to node
-A word in this case is an affect's synonym
-Returns a new_affect_word_node
+A word in this case is an rEmotion's synonym
+Returns a new_rEmotion_node
 '''
-def transform_affect_word(affect=None, word=None):
-    new_affect_word_node = Node(
+def transform_rEmotion_word(rEmotion=None, word=None, order=None):
+    new_rEmotion_word_node = Node(
         "Word",
-        affect=affect,
+        rEmotion=rEmotion,
         word=word,
+        order=order,
+        characters=len(word),
+        nodeType='word',
     )
 
-    return new_affect_word_node
+    return new_rEmotion_word_node
+
+'''
+Helper functions - Create new rEmotion-Word/rEmotion Relationship
+cnr --> create new relationship
+Takes an rEmotion-word node, and rEmotion node
+Returns an rEmotion_node
+'''
+def cnr_rEmotion_synonymized_by_rEmotion_word(rEmotion_node=None, rEmotion_word_node=None):
+
+    rEmotion_synonymized_by_rEmotion_word = Relationship(rEmotion_node, "SYNONYMIZED_BY", rEmotion_word_node)
+    secure_graph1.create(rEmotion_synonymized_by_rEmotion_word)
+
+    return 'success'
