@@ -55,6 +55,14 @@ def update_log(log=None):
 def destroy_log(log=None):
     return controllers.destroy_single_log(log=log)
 
+
+'''
+Emotion
+'''
+@load.route('/create_single_rEmotion_corpus/<rEmotion>', methods=['POST'])
+def create_rEmotion_corpus(rEmotion=None):
+    return controllers.create_single_rEmotion_corpus(rEmotion=rEmotion)
+
 '''
 General Record Keeping
 '''
