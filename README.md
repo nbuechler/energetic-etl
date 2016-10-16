@@ -62,6 +62,10 @@ If using aws, I encountered problems the 2nd week of Feb, 2016. DO NOT, FOR THE 
 
 -->https://flask-cors.readthedocs.org/en/latest/
 
+# Fun Facts
+* As of 2016.Oct.15, http://<root>/load/rEmotion_corpus/all took <b><i>7336244ms</i></b> or 2 hr. 2 min. 16 sec. 244 ms where 1 hr. = 3600000 ms
+
+
 #CORS
 from flask.ext.cors import CORS
 
