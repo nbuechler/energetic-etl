@@ -381,6 +381,14 @@ def create_single_rEmotion_corpus(rEmotion=None):
 
     return 'success'
 
+def create_all_rEmotion_corpora():
+
+    for rEmotion in all_emotions:
+        create_single_rEmotion_corpus(rEmotion=rEmotion)
+        print 'Finished Loading: ' + rEmotion
+
+    return 'success'
+
 
 '''
 This method only deletes all the records.
