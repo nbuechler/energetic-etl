@@ -345,7 +345,7 @@ Returns a new_rEmotion_node
 def transform_affect_dictionary(affect_dict=None, rEmotion=None):
     new_rEmotion_node = Node(
         "rEmotion",
-        rEmotion=rEmotion,
+        name=rEmotion,
         order1Length=len(affect_dict.get('order_1')),
         order2Length=len(affect_dict.get('order_2')),
         order3Length=len(affect_dict.get('order_3')),
@@ -362,7 +362,7 @@ def transform_rEmotion_word(rEmotion=None, word=None, order=None):
     new_rEmotion_word_node = Node(
         "Word",
         rEmotion=rEmotion,
-        word=word,
+        name=word,
         order=order,
         characters=len(word),
         nodeType='word',
