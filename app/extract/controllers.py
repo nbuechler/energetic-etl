@@ -156,11 +156,11 @@ def get_word_rep_emotion_pair_for_word(word):
     return 'Not implemented'
 
 '''
-Use this cypher query to get ditinct lsit for all the word object/r_emotion object pairs for a word
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(w:Word) 
+Use this cypher query to get distinct lsit for all the word object/r_emotion object pairs for a word
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(w:Word)
 WHERE w.name = 'emotion'
 RETURN count(DISTINCT(n.name)), n.name
 '''
 def get_distinct_list_word_rep_emotion_pair_for_word(word):
-    # TODO: ditinct lsit for all the word object/r_emotion object pairs for a word
+    # TODO: DISTINCTtinct lsit for all the word object/r_emotion object pairs for a word
     return 'Not implemented'
