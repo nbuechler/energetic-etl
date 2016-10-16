@@ -139,8 +139,28 @@ def get_rep_emotion_order(rEmotion=None, order_num=None):
 
 '''
 Use this cypher query
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {order: 1, name: "feel"}) RETURN n,a
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(w:Word {order: 1, name: "feel"}) RETURN n,a
 '''
 def get_common_word_across_all_rep_emotions(common_word):
     # TODO: Find a word across all emotions and return the emotion names
+    return 'Not implemented'
+
+'''
+Use this cypher query to get all the word object/r_emotion object pairs for a word
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(w:Word)
+WHERE w.name = 'emotion'
+RETURN w,n
+'''
+def get_word_rep_emotion_pair_for_word(word):
+    # TODO: get all the word object/r_emotion object pairs for a word
+    return 'Not implemented'
+
+'''
+Use this cypher query to get ditinct lsit for all the word object/r_emotion object pairs for a word
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(w:Word) 
+WHERE w.name = 'emotion'
+RETURN count(DISTINCT(n.name)), n.name
+'''
+def get_distinct_list_word_rep_emotion_pair_for_word(word):
+    # TODO: ditinct lsit for all the word object/r_emotion object pairs for a word
     return 'Not implemented'
