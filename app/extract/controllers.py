@@ -186,3 +186,24 @@ RETURN n,count(DISTINCT(r))
 def get_distinct_list__order1_and_order_2_nodes_for_r_emotion(word):
     # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
     return 'Not implemented'
+
+'''
+get_order_1_and_order_3_nodes_for_r_emotion
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+WHERE (a.order = 1) OR (a.order = 3)
+RETURN n,a
+'''
+def get_order_1_and_order_3_nodes_for_r_emotion(word):
+    # TODO: get_order_1_and_order_3_nodes_for_r_emotion
+    return 'Not implemented'
+
+
+'''
+get_distinct_list__order1_and_order_3_nodes_for_r_emotion]
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+WHERE (a.order = 1) OR (a.order = 3)
+RETURN n,count(DISTINCT(r))
+'''
+def get_distinct_list__order1_and_order_3_nodes_for_r_emotion(word):
+    # TODO: get_distinct_list__order1_and_order_3_nodes_for_r_emotion
+    return 'Not implemented'
