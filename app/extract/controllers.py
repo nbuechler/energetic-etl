@@ -139,7 +139,7 @@ def get_rep_emotion_order(rEmotion=None, order_num=None):
 
 '''
 Use this cypher query
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(w:Word {order: 1, name: "feel"}) RETURN n,a
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {order: 1, name: "feel"}) RETURN n,a
 '''
 def get_common_word_across_all_rep_emotions(common_word):
     # TODO: Find a word across all emotions and return the emotion names
