@@ -159,7 +159,7 @@ def get_word_rep_emotion_pair_for_word(word):
 Use this cypher query to get distinct lsit for all the word object/r_emotion object pairs for a word
 MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(w:Word)
 WHERE w.name = 'emotion'
-RETURN count(DISTINCT(n.name)), n.name
+RETURN count(DISTINCT(r)), n.name
 '''
 def get_distinct_list_word_rep_emotion_pair_for_word(word):
     # TODO: DISTINCTtinct lsit for all the word object/r_emotion object pairs for a word
