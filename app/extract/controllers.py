@@ -125,6 +125,16 @@ def get_log_node(log_id=None):
 
     return log_node
 
+
+
+'''
+
+Affect Extraction below
+
+'''
+# TODO: Refactor the below section, and maybe each of the above sections, into a seperate
+# supporting area of the code for extract
+
 '''
 Get an order for an R-EMOTION
 Takes two paramaters
@@ -141,7 +151,7 @@ def get_rep_emotion_order(rEmotion=None, order_num=None):
 Use this cypher query
 MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {order: 1, name: "feel"}) RETURN n,a
 '''
-def get_common_word_across_all_rep_emotions(common_word):
+def get_common_word_across_all_rep_emotions(common_word=None):
     # TODO: Find a word across all emotions and return the emotion names
     return 'Not implemented'
 
@@ -151,7 +161,7 @@ MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(w:Word)
 WHERE w.name = 'emotion'
 RETURN w,n
 '''
-def get_word_rep_emotion_pair_for_word(word):
+def get_word_rep_emotion_pair_for_word(word=None):
     # TODO: get all the word object/r_emotion object pairs for a word
     return 'Not implemented'
 
@@ -161,49 +171,63 @@ MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word)
 WHERE a.name = 'emotion'
 RETURN count(DISTINCT(r)), n.name
 '''
-def get_distinct_list_word_rep_emotion_pair_for_word(word):
+def get_distinct_list_word_rep_emotion_pair_for_word(word=None):
     # TODO: DISTINCTtinct lsit for all the word object/r_emotion object pairs for a word
     return 'Not implemented'
 
 
-'''
-get_order_1_and_order_2_nodes_for_r_emotion
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
-WHERE (a.order = 1) OR (a.order = 2)
-RETURN n,a
-'''
-def get_order_1_and_order_2_nodes_for_r_emotion(word):
-    # TODO: get_order_1_and_order_2_nodes_for_r_emotion
-    return 'Not implemented'
+def check_similarity_for_rep_emotion(order_A=None, order_B=None):
+    cypher = secure_graph1.cypher
+
+    query = ''
+    m = 'MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})'
+    w = 'WHERE (a.order = '+ order_A +') OR (a.order = '+ order_B +)'
+    r = 'RETURN n,count(DISTINCT(r))'
+
+    # Assembled query
+    query = m + w + r
+
+    query_result = cypher.execute(query)
+
+    return query_result
 
 
 '''
-get_distinct_list__order1_and_order_2_nodes_for_r_emotion]
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+get_distinct_list_order_1_and_order_2_nodes_for_r_emotion]
+MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
 WHERE (a.order = 1) OR (a.order = 2)
 RETURN n,count(DISTINCT(r))
 '''
-def get_distinct_list__order1_and_order_2_nodes_for_r_emotion(word):
+def check_o1_o2_similarity_for_rep_emotion(emotion=None, word=None):
+    result = check_similarity_for_rep_emotion(orderA=1, order_B=2)
+    return result
+
+'''
+get_distinct_list_order_1_and_order_3_nodes_for_r_emotion]
+MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+WHERE (a.order = 1) OR (a.order = 3)
+RETURN n,count(DISTINCT(r))
+'''
+def check_o1_o3_similarity_for_rep_emotion(emotion=None, word=None):
+    result = check_similarity_for_rep_emotion(orderA=1, order_B=3)
+    return result
+
+'''
+get_distinct_list_order_2_and_order_3_nodes_for_r_emotion]
+MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+WHERE (a.order = 2) OR (a.order = 3)
+RETURN n,count(DISTINCT(r))
+'''
+def check_o2_o3_similarity_for_rep_emotion(emotion=None, word=None):
+    result = check_similarity_for_rep_emotion(orderA=2, order_B=3)
+    return result
+
+'''
+get_distinct_list_order_1_and_order_2_and_order_3_nodes_for_r_emotion]
+MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+WHERE (a.order = 1) OR (a.order = 2) OR (a.order = 3)
+RETURN n,count(DISTINCT(r))
+'''
+def check_o1_o2_o3_similarity_for_rep_emotion(emotion=None, word=None):
     # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
-    return 'Not implemented'
-
-'''
-get_order_1_and_order_3_nodes_for_r_emotion
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
-WHERE (a.order = 1) OR (a.order = 3)
-RETURN n,a
-'''
-def get_order_1_and_order_3_nodes_for_r_emotion(word):
-    # TODO: get_order_1_and_order_3_nodes_for_r_emotion
-    return 'Not implemented'
-
-
-'''
-get_distinct_list__order1_and_order_3_nodes_for_r_emotion]
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
-WHERE (a.order = 1) OR (a.order = 3)
-RETURN n,count(DISTINCT(r))
-'''
-def get_distinct_list__order1_and_order_3_nodes_for_r_emotion(word):
-    # TODO: get_distinct_list__order1_and_order_3_nodes_for_r_emotion
     return 'Not implemented'

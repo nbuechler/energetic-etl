@@ -68,6 +68,7 @@ def create_rEmotion_corpus(rEmotion=None):
 def create_all_rEmotion_corpus():
     return controllers.create_all_rEmotion_corpora()
 
+
 '''
 General Record Keeping
 '''
