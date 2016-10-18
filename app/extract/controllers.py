@@ -125,6 +125,16 @@ def get_log_node(log_id=None):
 
     return log_node
 
+
+
+'''
+
+Affect Extraction below
+
+'''
+# TODO: Refactor the below section, and maybe each of the above sections, into a seperate
+# supporting area of the code for extract
+
 '''
 Get an order for an R-EMOTION
 Takes two paramaters
@@ -166,44 +176,44 @@ def get_distinct_list_word_rep_emotion_pair_for_word(word):
     return 'Not implemented'
 
 
-'''
-get_order_1_and_order_2_nodes_for_r_emotion
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
-WHERE (a.order = 1) OR (a.order = 2)
-RETURN n,a
-'''
-def get_order_1_and_order_2_nodes_for_r_emotion(word):
-    # TODO: get_order_1_and_order_2_nodes_for_r_emotion
-    return 'Not implemented'
 
 
 '''
-get_distinct_list__order1_and_order_2_nodes_for_r_emotion]
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+get_distinct_list_order_1_and_order_2_nodes_for_r_emotion]
+MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
 WHERE (a.order = 1) OR (a.order = 2)
 RETURN n,count(DISTINCT(r))
 '''
-def get_distinct_list__order1_and_order_2_nodes_for_r_emotion(word):
+def check_o1_o2_similarity_for_rep_emotion(emotion, word):
     # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
     return 'Not implemented'
 
 '''
-get_order_1_and_order_3_nodes_for_r_emotion
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
-WHERE (a.order = 1) OR (a.order = 3)
-RETURN n,a
-'''
-def get_order_1_and_order_3_nodes_for_r_emotion(word):
-    # TODO: get_order_1_and_order_3_nodes_for_r_emotion
-    return 'Not implemented'
-
-
-'''
-get_distinct_list__order1_and_order_3_nodes_for_r_emotion]
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+get_distinct_list_order_1_and_order_3_nodes_for_r_emotion]
+MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
 WHERE (a.order = 1) OR (a.order = 3)
 RETURN n,count(DISTINCT(r))
 '''
-def get_distinct_list__order1_and_order_3_nodes_for_r_emotion(word):
-    # TODO: get_distinct_list__order1_and_order_3_nodes_for_r_emotion
+def check_o1_o3_similarity_for_rep_emotion(emotion, word):
+    # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
+    return 'Not implemented'
+
+'''
+get_distinct_list_order_2_and_order_3_nodes_for_r_emotion]
+MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+WHERE (a.order = 2) OR (a.order = 3)
+RETURN n,count(DISTINCT(r))
+'''
+def check_o2_o3_similarity_for_rep_emotion(emotion, word):
+    # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
+    return 'Not implemented'
+
+'''
+get_distinct_list_order_1_and_order_2_and_order_3_nodes_for_r_emotion]
+MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
+WHERE (a.order = 1) OR (a.order = 2) OR (a.order = 3)
+RETURN n,count(DISTINCT(r))
+'''
+def check_o1_o2_o3_similarity_for_rep_emotion(emotion, word):
+    # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
     return 'Not implemented'
