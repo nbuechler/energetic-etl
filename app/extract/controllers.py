@@ -199,8 +199,8 @@ WHERE (a.order = 1) OR (a.order = 2)
 RETURN n,count(DISTINCT(r))
 '''
 def check_o1_o2_similarity_for_rep_emotion(emotion=None, word=None):
-    # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
-    return 'Not implemented'
+    result = check_similarity_for_rep_emotion(orderA=1, order_B=2)
+    return result
 
 '''
 get_distinct_list_order_1_and_order_3_nodes_for_r_emotion]
@@ -209,8 +209,8 @@ WHERE (a.order = 1) OR (a.order = 3)
 RETURN n,count(DISTINCT(r))
 '''
 def check_o1_o3_similarity_for_rep_emotion(emotion=None, word=None):
-    # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
-    return 'Not implemented'
+    result = check_similarity_for_rep_emotion(orderA=1, order_B=3)
+    return result
 
 '''
 get_distinct_list_order_2_and_order_3_nodes_for_r_emotion]
@@ -219,8 +219,8 @@ WHERE (a.order = 2) OR (a.order = 3)
 RETURN n,count(DISTINCT(r))
 '''
 def check_o2_o3_similarity_for_rep_emotion(emotion=None, word=None):
-    # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
-    return 'Not implemented'
+    result = check_similarity_for_rep_emotion(orderA=2, order_B=3)
+    return result
 
 '''
 get_distinct_list_order_1_and_order_2_and_order_3_nodes_for_r_emotion]

@@ -51,3 +51,14 @@ def get_rep_emotion_all(rEmotion=None, order_num=None):
             'order_3': order_3,
             }
         )
+
+
+'''
+Affect-Word Similarty
+'''
+
+@extract.route('/emotion/<rEmotion/comparison/<order_A>/with/<order_B>')
+def check_similarity_for_rep_emotion(order_A=None, order_B=None):
+    result = controllers.check_similarity_for_rep_emotion(order_A=order_A, order_B=order_B)
+    print result
+    return 'success'
