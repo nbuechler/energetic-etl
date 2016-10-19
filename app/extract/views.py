@@ -57,14 +57,15 @@ def get_rep_emotion_all(rEmotion=None, order_num=None):
 Affect-Word Similarty
 '''
 
-@extract.route('/emotion/<rEmotion/comparison/<order_A>/with/<order_B>')
-def check_similarity_for_rep_emotion(rEmotion=rEmotion, order_A=None, order_B=None):
-    result = controllers.check_similarity_for_rep_emotion(order_A=order_A, order_B=order_B)
+# TODO: Think about a better developer experience for an api!
+@extract.route('/emotion/<rEmotion>/comparison/<order_A>/with/<order_B>/for/<word>')
+def check_similarity_for_rep_emotion(rEmotion=None, order_A=None, order_B=None, word=None):
+    result = controllers.check_similarity_for_rep_emotion(order_A=order_A, order_B=order_B, rEmotion=rEmotion, word=word)
     print result
     return 'Barely Implemented'
 
-@extract.route('/emotion/<rEmotion/comparison/all')
-def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=rEmotion, word=None):
+@extract.route('/emotion/<rEmotion>/comparison/allfor/<word>')
+def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
     result = controllers.check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=rEmotion, word=word)
     print result
     return 'Not implemented'
