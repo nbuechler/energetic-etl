@@ -29,10 +29,10 @@ python app/runserver.py 5000 [For local, otherwise it will try to run on 80 and 
 
 
 # Things to do
-* Refactor: Make the 'intercepts' into specific 'extract', 'transform', and 'load' directories
-* Refactor: Be sure to include views!!
+* DONE: Make the 'intercepts' into specific 'extract', 'transform', and 'load' directories
+* DONE: Be sure to include views!!
 * Refactor: (Bonus points if there is a command line interface -- like click pip module)
-* Feature: Include code for making the ETL work for 'speedy-affect-scorer'
+* DONE: Include code for making the ETL work for 'speedy-affect-scorer'
 * Plan: Figure out where to store machine learning results: i.e. what kind of database?
 * Refactor: Remove old code from 'hungry-interceptor' when this is complete!
 * Chore: Check the config files for accuracy
