@@ -206,7 +206,7 @@ def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
     cypher = secure_graph1.cypher
 
     query = ''
-    m = 'MATCH (n:rEmotion {name: '+ rEmotion +'}) -[r:SYNONYMIZED_BY]-(a:Word {name: '+ word +'})'
+    m = 'MATCH (n:rEmotion {name: "'+ rEmotion +'"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "'+ word +'"})'
     w = 'WHERE (a.order = 1) OR (a.order = 2) OR (a.order = 3)'
     r = 'RETURN n,count(DISTINCT(r))'
 
