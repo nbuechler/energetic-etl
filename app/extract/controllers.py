@@ -185,8 +185,8 @@ def check_similarity_for_rep_emotion(order_A=None, order_B=None, rEmotion=None, 
     cypher = secure_graph1.cypher
 
     query = ''
-    m = 'MATCH (n:rEmotion {name: '+ rEmotion +'}) -[r:SYNONYMIZED_BY]-(a:Word {name: '+ word +'})'
-    w = 'WHERE (a.order = '+ order_A +') OR (a.order = '+ order_B +)'
+    m = 'MATCH (n:rEmotion {name: "'+ rEmotion +'"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "'+ word +'"})'
+    w = 'WHERE (a.order = '+ order_A +') OR (a.order = '+ order_B + ')'
     r = 'RETURN n,count(DISTINCT(r))'
 
     # Assembled query
@@ -203,5 +203,16 @@ WHERE (a.order = 1) OR (a.order = 2) OR (a.order = 3)
 RETURN n,count(DISTINCT(r))
 '''
 def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
-    # TODO: get_distinct_list__order1_and_order_2_nodes_for_r_emotion
-    return 'Not implemented'
+    cypher = secure_graph1.cypher
+
+    query = ''
+    m = 'MATCH (n:rEmotion {name: "'+ rEmotion +'"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "'+ word +'"})'
+    w = 'WHERE (a.order = 1) OR (a.order = 2) OR (a.order = 3)'
+    r = 'RETURN n,count(DISTINCT(r))'
+
+    # Assembled query
+    query = m + w + r
+
+    query_result = cypher.execute(query)
+
+    return query_result
