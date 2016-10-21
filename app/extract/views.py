@@ -58,10 +58,10 @@ Affect-Word Similarty
 '''
 
 '''
-rEmotion are strings
-order_A are numbers
-order_B are numbers
-word are strings
+rEmotion > string
+order_A > number
+order_B > number
+word > string
 --
 Returns 1 if word exists in both order_A and order_B
 Returns 0 if word does NOT exist in both order_A and order_B
@@ -85,6 +85,13 @@ def check_similarity_for_rep_emotion(rEmotion=None, order_A=None, order_B=None, 
 
     return str(result)
 
+'''
+rEmotion > string
+word > string
+--
+Returns 1 if word exists in both order_A and order_B
+Returns 0 if word does NOT exist in both order_A and order_B
+'''
 @extract.route('/emotion/<rEmotion>/order/all/<word>')
 def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
     query_result = controllers.check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=rEmotion, word=word)
