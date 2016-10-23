@@ -176,7 +176,7 @@ def get_distinct_list_word_rep_emotion_pair_for_word(word=None):
     return 'Not implemented'
 
 '''
-This method compares two orders to find one common word in both.
+This method compares two orders to find one common word in both orders.
 MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
 WHERE (a.order = 1) OR (a.order = 2)
 RETURN n,count(DISTINCT(r))
@@ -210,7 +210,7 @@ def compare_two_orders_for_common_word(order_A=None, order_B=None, rEmotion=None
     return result
 
 '''
-This method compares all (three) orders to find one common word in both.
+This method compares all (three) orders to find one common word in all orders.
 MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
 WHERE (a.order = 1) OR (a.order = 2) OR (a.order = 3)
 RETURN n,count(DISTINCT(r))
@@ -244,5 +244,15 @@ def compare_all_orders_for_common_word(rEmotion=None, word=None):
     return result
 
 '''
+This method compares two orders to find one common list of words in both orders.
+'''
+def compare_two_orders_for_common_word_list(order_A=None, order_B=None, rEmotion=None, word_list=None):
+
+    return 'Not Implemented'
 
 '''
+This method compares all (three) orders to find one common list of words in all orders.
+'''
+def compare_all_orders_for_common_word_list(rEmotion=None, word_list=None):
+
+    return 'Not Implemented'
