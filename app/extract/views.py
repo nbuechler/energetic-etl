@@ -85,14 +85,33 @@ def compare_all_orders_for_common_word(rEmotion=None, word=None):
 
     return str(result)
 
+'''
+The similarity value is a hard-coded '1' because true means everything in this case ;)
+--
+rEmotion > string
+order_A > number
+order_B > number
+word > string
+--
+Returns an object with lists in it, where each key is a list of similarity
+'''
 
-@extract.route('/emotion/<rEmotion>/order/<order_A>,<order_B>/similarity/all')
+@extract.route('/emotion/<rEmotion>/order/<order_A>,<order_B>/similarity/1')
 def compare_two_orders_for_common_word_list(rEmotion=None, order_A=None, order_B=None, word_list=None):
     result = controllers.compare_two_orders_for_common_word_list(rEmotion=None, order_A=None, order_B=None, word_list=None)
 
     return result
 
-@extract.route('/emotion/<rEmotion>/order/all/similarity/all')
+
+'''
+The similarity value is a hard-coded '1' because true means everything in this case ;)
+--
+rEmotion > string
+word > string
+--
+Returns an object with lists in it, where each key is a list of similarity
+'''
+@extract.route('/emotion/<rEmotion>/order/all/similarity/1')
 def compare_all_orders_for_common_word_list(rEmotion=None, word_list=None):
     result = controllers.compare_all_orders_for_common_word_list(rEmotion=None, word_list=None)
 
