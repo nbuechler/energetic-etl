@@ -194,7 +194,20 @@ def check_similarity_for_rep_emotion(order_A=None, order_B=None, rEmotion=None, 
 
     query_result = cypher.execute(query)
 
-    return query_result
+    result = 0
+    try:
+        word_total = query_result[0][1]
+        if word_total == 1:
+            result = 0
+        elif word_total == 2:
+            result = 1
+    except Exception as e:
+        # TODO: Write the exception of index out of bounds for: query_result[0][1]
+        # to a log file
+        print 'Word does not exist in either order'
+        pass
+
+    return result
 
 '''
 get_distinct_list_order_1_and_order_2_and_order_3_nodes_for_r_emotion]
@@ -215,4 +228,17 @@ def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
 
     query_result = cypher.execute(query)
 
-    return query_result
+    result = 0
+    try:
+        word_total = query_result[0][1]
+        if word_total == 3:
+            result = 1
+        elif word_total == 2 or word_total == 1:
+            result = 0
+    except Exception as e:
+        # TODO: Write the exception of index out of bounds for: query_result[0][1]
+        # to a log file
+        print 'Word does not exist in any order'
+        pass
+
+    return result

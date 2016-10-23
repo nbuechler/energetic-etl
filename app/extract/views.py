@@ -68,20 +68,7 @@ Returns 0 if word does NOT exist in both order_A and order_B
 '''
 @extract.route('/emotion/<rEmotion>/order/<order_A>,<order_B>/<word>')
 def check_similarity_for_rep_emotion(rEmotion=None, order_A=None, order_B=None, word=None):
-    query_result = controllers.check_similarity_for_rep_emotion(order_A=order_A, order_B=order_B, rEmotion=rEmotion, word=word)
-
-    result = 0
-    try:
-        word_total = query_result[0][1]
-        if word_total == 1:
-            result = 0
-        elif word_total == 2:
-            result = 1
-    except Exception as e:
-        # TODO: Write the exception of index out of bounds for: query_result[0][1]
-        # to a log file
-        print 'Word does not exist in either order'
-        pass
+    result = controllers.check_similarity_for_rep_emotion(order_A=order_A, order_B=order_B, rEmotion=rEmotion, word=word)
 
     return str(result)
 
@@ -94,19 +81,6 @@ Returns 0 if word does NOT exist in both order_A and order_B
 '''
 @extract.route('/emotion/<rEmotion>/order/all/<word>')
 def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
-    query_result = controllers.check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=rEmotion, word=word)
-
-    result = 0
-    try:
-        word_total = query_result[0][1]
-        if word_total == 3:
-            result = 1
-        elif word_total == 2 or word_total == 1:
-            result = 0
-    except Exception as e:
-        # TODO: Write the exception of index out of bounds for: query_result[0][1]
-        # to a log file
-        print 'Word does not exist in any order'
-        pass
+    result = controllers.check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=rEmotion, word=word)
 
     return str(result)
