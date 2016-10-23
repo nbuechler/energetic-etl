@@ -67,8 +67,8 @@ Returns 1 if word exists in both order_A and order_B
 Returns 0 if word does NOT exist in both order_A and order_B
 '''
 @extract.route('/emotion/<rEmotion>/order/<order_A>,<order_B>/<word>')
-def check_similarity_for_rep_emotion(rEmotion=None, order_A=None, order_B=None, word=None):
-    result = controllers.check_similarity_for_rep_emotion(order_A=order_A, order_B=order_B, rEmotion=rEmotion, word=word)
+def compare_two_orders_for_common_word(rEmotion=None, order_A=None, order_B=None, word=None):
+    result = controllers.compare_two_orders_for_common_word(order_A=order_A, order_B=order_B, rEmotion=rEmotion, word=word)
 
     return str(result)
 
@@ -80,7 +80,7 @@ Returns 1 if word exists in both order_A and order_B
 Returns 0 if word does NOT exist in both order_A and order_B
 '''
 @extract.route('/emotion/<rEmotion>/order/all/<word>')
-def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
-    result = controllers.check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=rEmotion, word=word)
+def compare_all_orders_for_common_word(rEmotion=None, word=None):
+    result = controllers.compare_all_orders_for_common_word(rEmotion=rEmotion, word=word)
 
     return str(result)

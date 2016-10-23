@@ -176,12 +176,12 @@ def get_distinct_list_word_rep_emotion_pair_for_word(word=None):
     return 'Not implemented'
 
 '''
-get_distinct_list_order_1_and_order_2_nodes_for_r_emotion]
+This method compares two orders to find one common word in both.
 MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
 WHERE (a.order = 1) OR (a.order = 2)
 RETURN n,count(DISTINCT(r))
 '''
-def check_similarity_for_rep_emotion(order_A=None, order_B=None, rEmotion=None, word=None):
+def compare_two_orders_for_common_word(order_A=None, order_B=None, rEmotion=None, word=None):
     cypher = secure_graph1.cypher
 
     query = ''
@@ -210,12 +210,12 @@ def check_similarity_for_rep_emotion(order_A=None, order_B=None, rEmotion=None, 
     return result
 
 '''
-get_distinct_list_order_1_and_order_2_and_order_3_nodes_for_r_emotion]
+This method compares all (three) orders to find one common word in both.
 MATCH (n:rEmotion {name: "joy"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "emotion"})
 WHERE (a.order = 1) OR (a.order = 2) OR (a.order = 3)
 RETURN n,count(DISTINCT(r))
 '''
-def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
+def compare_all_orders_for_common_word(rEmotion=None, word=None):
     cypher = secure_graph1.cypher
 
     query = ''
@@ -242,3 +242,7 @@ def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
         pass
 
     return result
+
+'''
+
+'''
