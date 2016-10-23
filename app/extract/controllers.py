@@ -246,13 +246,40 @@ def compare_all_orders_for_common_word(rEmotion=None, word=None):
 '''
 This method compares two orders to find one common list of words in both orders.
 '''
-def compare_two_orders_for_common_word_list(order_A=None, order_B=None, rEmotion=None, word_list=None):
+def compare_two_orders_for_common_word_list(order_A=None, order_B=None, rEmotion=None):
 
-    return 'Not Implemented'
+    o_A = get_rep_emotion_order(rEmotion=rEmotion, order_num=order_A)['result']
+    o_B = get_rep_emotion_order(rEmotion=rEmotion, order_num=order_B)['result']
+
+    all_words = o_A + o_B
+
+    result = []
+
+    print '--Calculating similarities of words--'
+    for word in set(all_words):
+        if compare_all_orders_for_common_word(rEmotion=rEmotion, word=word) == 1:
+            result.append(word)
+    print '--Finished all words--'
+
+    return {'status': 'success', 'result': result}
 
 '''
 This method compares all (three) orders to find one common list of words in all orders.
 '''
-def compare_all_orders_for_common_word_list(rEmotion=None, word_list=None):
+def compare_all_orders_for_common_word_list(rEmotion=None):
 
-    return 'Not Implemented'
+    order_1 = get_rep_emotion_order(rEmotion=rEmotion, order_num=1)['result']
+    order_2 = get_rep_emotion_order(rEmotion=rEmotion, order_num=2)['result']
+    order_3 = get_rep_emotion_order(rEmotion=rEmotion, order_num=3)['result']
+
+    all_words = order_1 + order_2 + order_3
+
+    result = []
+
+    print '--Calculating similarities of words--'
+    for word in set(all_words):
+        if compare_all_orders_for_common_word(rEmotion=rEmotion, word=word) == 1:
+            result.append(word)
+    print '--Finished all words--'
+
+    return {'status': 'success', 'result': result}

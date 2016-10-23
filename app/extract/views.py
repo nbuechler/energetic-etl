@@ -93,14 +93,14 @@ order_A > number
 order_B > number
 word > string
 --
-Returns an object with lists in it, where each key is a list of similarity
+Returns a list with words in it, where each word is a word that is in both orders
 '''
 
 @extract.route('/emotion/<rEmotion>/order/<order_A>,<order_B>/similarity/1')
-def compare_two_orders_for_common_word_list(rEmotion=None, order_A=None, order_B=None, word_list=None):
-    result = controllers.compare_two_orders_for_common_word_list(rEmotion=None, order_A=None, order_B=None, word_list=None)
+def compare_two_orders_for_common_word_list(rEmotion=None, order_A=None, order_B=None):
+    result = controllers.compare_two_orders_for_common_word_list(rEmotion=rEmotion, order_A=order_A, order_B=order_B)
 
-    return result
+    return jsonify(result)
 
 
 '''
@@ -109,10 +109,11 @@ The similarity value is a hard-coded '1' because true means everything in this c
 rEmotion > string
 word > string
 --
-Returns an object with lists in it, where each key is a list of similarity
+Returns a list with words in it, where each word is a word that is in all the orders
 '''
 @extract.route('/emotion/<rEmotion>/order/all/similarity/1')
-def compare_all_orders_for_common_word_list(rEmotion=None, word_list=None):
-    result = controllers.compare_all_orders_for_common_word_list(rEmotion=None, word_list=None)
+def compare_all_orders_for_common_word_list(rEmotion=None):
 
-    return result
+    result = controllers.compare_all_orders_for_common_word_list(rEmotion=rEmotion)
+
+    return jsonify(result)
