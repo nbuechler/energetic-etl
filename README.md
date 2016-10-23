@@ -64,6 +64,7 @@ If using aws, I encountered problems the 2nd week of Feb, 2016. DO NOT, FOR THE 
 
 # Fun Facts
 * As of 2016.Oct.15, http://<root>/load/rEmotion_corpus/all took <b><i>7336244ms</i></b> or 2 hr. 2 min. 16 sec. 244 ms where 1 hr. = 3600000 ms
+* Other research begins to support the idea of an I-EMOTION: http://nymag.com/scienceofus/2016/10/this-personality-trait-makes-it-hard-to-understand-symptoms.html?mid=facebook_scienceofus 
 
 
 #CORS

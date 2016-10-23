@@ -66,22 +66,9 @@ word > string
 Returns 1 if word exists in both order_A and order_B
 Returns 0 if word does NOT exist in both order_A and order_B
 '''
-@extract.route('/emotion/<rEmotion>/order/<order_A>,<order_B>/<word>')
-def check_similarity_for_rep_emotion(rEmotion=None, order_A=None, order_B=None, word=None):
-    query_result = controllers.check_similarity_for_rep_emotion(order_A=order_A, order_B=order_B, rEmotion=rEmotion, word=word)
-
-    result = 0
-    try:
-        word_total = query_result[0][1]
-        if word_total == 1:
-            result = 0
-        elif word_total == 2:
-            result = 1
-    except Exception as e:
-        # TODO: Write the exception of index out of bounds for: query_result[0][1]
-        # to a log file
-        print 'Word does not exist in either order'
-        pass
+@extract.route('/emotion/<rEmotion>/order/<order_A>,<order_B>/similarity/<word>')
+def compare_two_orders_for_common_word(rEmotion=None, order_A=None, order_B=None, word=None):
+    result = controllers.compare_two_orders_for_common_word(order_A=order_A, order_B=order_B, rEmotion=rEmotion, word=word)
 
     return str(result)
 
@@ -92,21 +79,40 @@ word > string
 Returns 1 if word exists in both order_A and order_B
 Returns 0 if word does NOT exist in both order_A and order_B
 '''
-@extract.route('/emotion/<rEmotion>/order/all/<word>')
-def check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=None, word=None):
-    query_result = controllers.check_o1_o2_o3_similarity_for_rep_emotion(rEmotion=rEmotion, word=word)
-
-    result = 0
-    try:
-        word_total = query_result[0][1]
-        if word_total == 3:
-            result = 1
-        elif word_total == 2 or word_total == 1:
-            result = 0
-    except Exception as e:
-        # TODO: Write the exception of index out of bounds for: query_result[0][1]
-        # to a log file
-        print 'Word does not exist in any order'
-        pass
+@extract.route('/emotion/<rEmotion>/order/all/similarity/<word>')
+def compare_all_orders_for_common_word(rEmotion=None, word=None):
+    result = controllers.compare_all_orders_for_common_word(rEmotion=rEmotion, word=word)
 
     return str(result)
+
+'''
+The similarity value is a hard-coded '1' because true means everything in this case ;)
+--
+rEmotion > string
+order_A > number
+order_B > number
+word > string
+--
+Returns an object with lists in it, where each key is a list of similarity
+'''
+
+@extract.route('/emotion/<rEmotion>/order/<order_A>,<order_B>/similarity/1')
+def compare_two_orders_for_common_word_list(rEmotion=None, order_A=None, order_B=None, word_list=None):
+    result = controllers.compare_two_orders_for_common_word_list(rEmotion=None, order_A=None, order_B=None, word_list=None)
+
+    return result
+
+
+'''
+The similarity value is a hard-coded '1' because true means everything in this case ;)
+--
+rEmotion > string
+word > string
+--
+Returns an object with lists in it, where each key is a list of similarity
+'''
+@extract.route('/emotion/<rEmotion>/order/all/similarity/1')
+def compare_all_orders_for_common_word_list(rEmotion=None, word_list=None):
+    result = controllers.compare_all_orders_for_common_word_list(rEmotion=None, word_list=None)
+
+    return result
