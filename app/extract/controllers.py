@@ -148,32 +148,26 @@ def get_rep_emotion_order(rEmotion=None, order_num=None):
     return {'status': 'success', 'result': order}
 
 '''
-Use this cypher query
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {order: 1, name: "feel"}) RETURN n,a
-'''
-def get_common_word_across_all_rep_emotions(common_word=None):
-    # TODO: Find a word across all emotions and return the emotion names
-    return 'Not implemented'
-
-'''
-Use this cypher query to get all the word object/r_emotion object pairs for a word
-MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(w:Word)
-WHERE w.name = 'emotion'
-RETURN w,n
-'''
-def get_word_rep_emotion_pair_for_word(word=None):
-    # TODO: get all the word object/r_emotion object pairs for a word
-    return 'Not implemented'
-
-'''
-Use this cypher query to get distinct list for all the word object/r_emotion object pairs for a word
+Use this cypher query to get the [word object count,r_emotion object] pairs for a word
+e.g. [2, satisfaction] - this means satisfication has the word emotion in two of its three orders
 MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word)
 WHERE a.name = 'emotion'
 RETURN count(DISTINCT(r)), n.name
 '''
-def get_distinct_list_word_rep_emotion_pair_for_word(word=None):
-    # TODO: DISTINCTtinct lsit for all the word object/r_emotion object pairs for a word
-    return 'Not implemented'
+def get_word_count_for_rep_emotion(rEmotion=None, word=None):
+    cypher = secure_graph1.cypher
+
+    query = ''
+    m = 'MATCH (n:rEmotion {name: "'+ rEmotion +'"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "'+ word +'"})'
+    w = 'WHERE a.name = "'+ word +'"'
+    r = 'RETURN n,count(DISTINCT(r))'
+
+    # Assembled query
+    query = m + w + r
+
+    query_result = cypher.execute(query)
+
+    return {'status': 'success', 'rEmotion': rEmotion, 'word': word, 'count': query_result[0][1]}
 
 '''
 This method compares two orders to find one common word in both orders.

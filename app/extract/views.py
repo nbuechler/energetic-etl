@@ -57,6 +57,14 @@ def get_rep_emotion_all(rEmotion=None, order_num=None):
 Affect-Word Similarty
 '''
 
+@extract.route('/emotion/<rEmotion>/similarity/<word>')
+def get_word_count_for_rep_emotion(rEmotion=None, word=None):
+
+    result = controllers.get_word_counts_across_corpora(rEmotion=rEmotion, word=word)
+
+    return jsonify(result)
+
+
 '''
 rEmotion > string
 order_A > number
