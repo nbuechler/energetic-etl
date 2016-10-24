@@ -70,7 +70,12 @@ def get_word_count_for_rep_emotion(rEmotion=None, word=None):
 
     return jsonify(result)
 
-
+'''
+word > string
+--
+Returns an object that lists information about the number of remotions that contain the word at least once
+If an remotions contains a word more than once, the count is still only incremented once for that word.
+'''
 @extract.route('/emotion/all/similarity/<word>')
 def get_word_counts_across_corpora(word=None):
 
