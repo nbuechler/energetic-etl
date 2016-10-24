@@ -57,6 +57,12 @@ def get_rep_emotion_all(rEmotion=None, order_num=None):
 Affect-Word Similarty
 '''
 
+'''
+rEmotion > string
+word > string
+--
+Returns an object that lists information about the number of times a word is used for an r-emotion
+'''
 @extract.route('/emotion/<rEmotion>/similarity/<word>')
 def get_word_count_for_rep_emotion(rEmotion=None, word=None):
 
