@@ -26,7 +26,9 @@ import datetime
 from extract.controllers import (get_user_node,
                                    get_activity_node,
                                    get_experience_node,
-                                   get_log_node)
+                                   get_log_node,
+                                   compare_two_orders_for_common_word_list,
+                                   compare_all_orders_for_common_word_list,)
 
 '''
 Helper functions - Create new User/Activity Relationship
@@ -382,3 +384,26 @@ def cnr_rEmotion_synonymized_by_rEmotion_word(rEmotion_node=None, rEmotion_word_
     secure_graph1.create(rEmotion_synonymized_by_rEmotion_word)
 
     return 'success'
+
+'''
+rEmotion > string
+--
+Returns a an object:
+status - success
+n number of lists - various lists, probably 4 for now, which are the similar words in each order
+'''
+def build_enhanced_rEmotion_similaritiy_object(rEmotion=None):
+
+    order_1_and_2 = compare_two_orders_for_common_word_list(rEmotion=rEmotion, order_A=1, order_B=2)
+    order_1_and_3 = compare_two_orders_for_common_word_list(rEmotion=rEmotion, order_A=1, order_B=3)
+    order_2_and_3 = compare_two_orders_for_common_word_list(rEmotion=rEmotion, order_A=2, order_B=3)
+    all_orders = compare_all_orders_for_common_word_list(rEmotion=rEmotion)
+
+    return {
+            'status': 'success',
+            'word': rEmotion,
+            'order_1_and_2': order_1_and_2['result'],
+            'order_1_and_3': order_1_and_3['result'],
+            'order_2_and_3': order_2_and_3['result'],
+            'all_orders': all_orders['result'],
+           }
