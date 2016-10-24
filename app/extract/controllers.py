@@ -25,6 +25,17 @@ import datetime
 
 
 '''
+Utility functions
+'''
+
+def convert_unicode_list(unicode_list):
+    string_list = []
+    for x in unicode_list:
+        string_list.append(str(x))
+
+    return string_list
+
+'''
 Helper functions - Get a new user node
 Takes a user_id as a paramater
 Returns a user_node (either a new one or a one that already exists)
@@ -147,6 +158,25 @@ def get_rep_emotion_order(rEmotion=None, order_num=None):
 
     return {'status': 'success', 'result': order}
 
+def get_rEmotion_flat_corpora(rEmotion=None):
+
+    order_1 = get_rep_emotion_order(rEmotion=rEmotion, order_num=1)
+    order_2 = get_rep_emotion_order(rEmotion=rEmotion, order_num=2)
+    order_3 = get_rep_emotion_order(rEmotion=rEmotion, order_num=3)
+
+
+    rEmotion_flat_list = (order_1['result']) + (order_2['result']) + (order_3['result'])
+    unq_rEmotion_flat_list = list(set(rEmotion_flat_list))
+
+    result = {"status": 'success', 'rEmotion': rEmotion, 'rEmotion-words': unq_rEmotion_flat_list, 'rEmotion-word-length': len(unq_rEmotion_flat_list)}
+
+    return result
+
+def get_all_rep_emotion_flat_corpora():
+
+    return 'Not Implemented'
+
+
 '''
 Use this cypher query to get the [word object count,r_emotion object] pairs for a word
 e.g. [2, satisfaction] - this means satisfication has the word emotion in two of its three orders
@@ -167,7 +197,37 @@ def get_word_count_for_rep_emotion(rEmotion=None, word=None):
 
     query_result = cypher.execute(query)
 
-    return {'status': 'success', 'rEmotion': rEmotion, 'word': word, 'count': query_result[0][1]}
+    try:
+        return {'status': 'success', 'rEmotion': rEmotion, 'word': word, 'count': query_result[0][1]}
+    except Exception as e:
+        pass
+    return {'status': 'success', 'rEmotion': rEmotion, 'word': word, 'count': 0}
+
+'''
+Use this cypher query, for all r-emotions, to get the [word object count,r_emotion object] pairs for a word
+e.g. [2, satisfaction] - this means satisfication has the word emotion in two of its three orders
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word)
+WHERE a.name = 'emotion'
+RETURN count(DISTINCT(r)), n.name
+'''
+def get_word_counts_across_corpora(word=None):
+    cypher = secure_graph1.cypher
+
+    query = ''
+    m = 'MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "'+ word +'"})'
+    w = 'WHERE a.name = "'+ word +'"'
+    r = 'RETURN n,count(DISTINCT(r))'
+
+    # Assembled query
+    query = m + w + r
+
+    query_result = cypher.execute(query)
+
+    print query_result
+
+    return {'status': 'success', 'word': word, 'emotion-count': len(query_result)}
+
+
 
 '''
 This method compares two orders to find one common word in both orders.

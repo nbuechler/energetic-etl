@@ -37,6 +37,20 @@ Emotion
 def get_rep_emotion_order(rEmotion=None, order_num=None):
     return jsonify(controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=order_num))
 
+@extract.route('/emotion/<rEmotion>/order/all/flat')
+def get_rEmotion_flat_corpora(rEmotion=None):
+
+    result = controllers.get_rEmotion_flat_corpora(rEmotion=rEmotion)
+
+    return jsonify(result)
+
+@extract.route('/emotion/all/order/all/flat')
+def get_all_rep_emotion_flat_corpora():
+
+    result = controllers.get_all_rep_emotion_flat_corpora()
+
+    return result
+
 @extract.route('/emotion/<rEmotion>/order/all')
 def get_rep_emotion_all(rEmotion=None, order_num=None):
     order_1 = controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=1)['result']
@@ -57,10 +71,29 @@ def get_rep_emotion_all(rEmotion=None, order_num=None):
 Affect-Word Similarty
 '''
 
+'''
+rEmotion > string
+word > string
+--
+Returns an object that lists information about the number of times a word is used for an r-emotion
+'''
 @extract.route('/emotion/<rEmotion>/similarity/<word>')
 def get_word_count_for_rep_emotion(rEmotion=None, word=None):
 
-    result = controllers.get_word_counts_across_corpora(rEmotion=rEmotion, word=word)
+    result = controllers.get_word_count_for_rep_emotion(rEmotion=rEmotion, word=word)
+
+    return jsonify(result)
+
+'''
+word > string
+--
+Returns an object that lists information about the number of remotions that contain the word at least once
+If an remotions contains a word more than once, the count is still only incremented once for that word.
+'''
+@extract.route('/emotion/all/similarity/<word>')
+def get_word_counts_across_corpora(word=None):
+
+    result = controllers.get_word_counts_across_corpora(word=word)
 
     return jsonify(result)
 
