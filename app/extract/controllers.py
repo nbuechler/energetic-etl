@@ -186,7 +186,7 @@ def compare_two_orders_for_common_word(order_A=None, order_B=None, rEmotion=None
 
     query = ''
     m = 'MATCH (n:rEmotion {name: "'+ rEmotion +'"}) -[r:SYNONYMIZED_BY]-(a:Word {name: "'+ word +'"})'
-    w = 'WHERE (a.order = '+ order_A +') OR (a.order = '+ order_B + ')'
+    w = 'WHERE (a.order = '+ str(order_A) +') OR (a.order = '+ str(order_B) + ')'
     r = 'RETURN n,count(DISTINCT(r))'
 
     # Assembled query
@@ -247,17 +247,16 @@ def compare_all_orders_for_common_word(rEmotion=None, word=None):
 This method compares two orders to find one common list of words in both orders.
 '''
 def compare_two_orders_for_common_word_list(order_A=None, order_B=None, rEmotion=None):
+    o_A = get_rep_emotion_order(rEmotion=rEmotion, order_num=order_A)
+    o_B = get_rep_emotion_order(rEmotion=rEmotion, order_num=order_B)
 
-    o_A = get_rep_emotion_order(rEmotion=rEmotion, order_num=order_A)['result']
-    o_B = get_rep_emotion_order(rEmotion=rEmotion, order_num=order_B)['result']
-
-    all_words = o_A + o_B
+    all_words = o_A['result'] + o_B['result']
 
     result = []
 
     print '--Calculating similarities of words--'
     for word in set(all_words):
-        if compare_all_orders_for_common_word(rEmotion=rEmotion, word=word) == 1:
+        if compare_two_orders_for_common_word(order_A=order_A, order_B=order_B, rEmotion=rEmotion, word=word) == 1:
             result.append(word)
     print '--Finished all words--'
 

@@ -91,10 +91,10 @@ The similarity value is a hard-coded '1' because true means everything in this c
 rEmotion > string
 order_A > number
 order_B > number
-word > string
 --
-Returns a list with words in it, where each word is a word that is in both orders
-'''
+Returns a object with two attributes:
+status - success
+result - list with words in it, where each word is a word that is in all the orders'''
 
 @extract.route('/emotion/<rEmotion>/order/<order_A>,<order_B>/similarity/1')
 def compare_two_orders_for_common_word_list(rEmotion=None, order_A=None, order_B=None):
@@ -107,9 +107,10 @@ def compare_two_orders_for_common_word_list(rEmotion=None, order_A=None, order_B
 The similarity value is a hard-coded '1' because true means everything in this case ;)
 --
 rEmotion > string
-word > string
 --
-Returns a list with words in it, where each word is a word that is in all the orders
+Returns a object with two attributes:
+status - success
+result - list with words in it, where each word is a word that is in all the orders
 '''
 @extract.route('/emotion/<rEmotion>/order/all/similarity/1')
 def compare_all_orders_for_common_word_list(rEmotion=None):
