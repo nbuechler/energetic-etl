@@ -173,7 +173,29 @@ def get_word_count_for_rep_emotion(rEmotion=None, word=None):
         pass
     return {'status': 'success', 'rEmotion': rEmotion, 'word': word, 'count': 0}
 
+'''
+Use this cypher query, for all r-emotions, to get the [word object count,r_emotion object] pairs for a word
+e.g. [2, satisfaction] - this means satisfication has the word emotion in two of its three orders
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word)
+WHERE a.name = 'emotion'
+RETURN count(DISTINCT(r)), n.name
+'''
+def get_word_counts_across_corpora(word=None):
+    cypher = secure_graph1.cypher
 
+    query = ''
+    m = 'MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word {name: "'+ word +'"})'
+    w = 'WHERE a.name = "'+ word +'"'
+    r = 'RETURN n,count(DISTINCT(r))'
+
+    # Assembled query
+    query = m + w + r
+
+    query_result = cypher.execute(query)
+
+    print query_result
+
+    return {'status': 'success', 'word': word, 'emotion-count': len(query_result)}
 
 
 
