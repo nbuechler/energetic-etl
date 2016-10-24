@@ -66,7 +66,15 @@ Returns an object that lists information about the number of times a word is use
 @extract.route('/emotion/<rEmotion>/similarity/<word>')
 def get_word_count_for_rep_emotion(rEmotion=None, word=None):
 
-    result = controllers.get_word_counts_across_corpora(rEmotion=rEmotion, word=word)
+    result = controllers.get_word_count_for_rep_emotion(rEmotion=rEmotion, word=word)
+
+    return jsonify(result)
+
+
+@extract.route('/emotion/all/similarity/<word>')
+def get_word_counts_across_corpora(word=None):
+
+    result = controllers.get_word_counts_across_corpora(word=word)
 
     return jsonify(result)
 

@@ -167,7 +167,15 @@ def get_word_count_for_rep_emotion(rEmotion=None, word=None):
 
     query_result = cypher.execute(query)
 
-    return {'status': 'success', 'rEmotion': rEmotion, 'word': word, 'count': query_result[0][1]}
+    try:
+        return {'status': 'success', 'rEmotion': rEmotion, 'word': word, 'count': query_result[0][1]}
+    except Exception as e:
+        pass
+    return {'status': 'success', 'rEmotion': rEmotion, 'word': word, 'count': 0}
+
+
+
+
 
 '''
 This method compares two orders to find one common word in both orders.
