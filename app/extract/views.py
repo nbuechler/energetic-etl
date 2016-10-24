@@ -37,6 +37,20 @@ Emotion
 def get_rep_emotion_order(rEmotion=None, order_num=None):
     return jsonify(controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=order_num))
 
+@extract.route('/emotion/<rEmotion>/order/all/flat')
+def get_rEmotion_flat_corpora(rEmotion=None):
+
+    result = controllers.get_rEmotion_flat_corpora(rEmotion=rEmotion)
+
+    return jsonify(result)
+
+@extract.route('/emotion/all/order/all/flat')
+def get_all_rep_emotion_flat_corpora():
+
+    result = controllers.get_all_rep_emotion_flat_corpora()
+
+    return result
+
 @extract.route('/emotion/<rEmotion>/order/all')
 def get_rep_emotion_all(rEmotion=None, order_num=None):
     order_1 = controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=1)['result']

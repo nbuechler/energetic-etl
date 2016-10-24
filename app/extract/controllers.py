@@ -25,6 +25,17 @@ import datetime
 
 
 '''
+Utility functions
+'''
+
+def convert_unicode_list(unicode_list):
+    string_list = []
+    for x in unicode_list:
+        string_list.append(str(x))
+
+    return string_list
+
+'''
 Helper functions - Get a new user node
 Takes a user_id as a paramater
 Returns a user_node (either a new one or a one that already exists)
@@ -146,6 +157,25 @@ def get_rep_emotion_order(rEmotion=None, order_num=None):
     order = affect_corpus_synopsis.db['lingustic-affects'].find_one({'word': rEmotion})['order-' + str(order_num)]
 
     return {'status': 'success', 'result': order}
+
+def get_rEmotion_flat_corpora(rEmotion=None):
+
+    order_1 = get_rep_emotion_order(rEmotion=rEmotion, order_num=1)
+    order_2 = get_rep_emotion_order(rEmotion=rEmotion, order_num=2)
+    order_3 = get_rep_emotion_order(rEmotion=rEmotion, order_num=3)
+
+
+    rEmotion_flat_list = (order_1['result']) + (order_2['result']) + (order_3['result'])
+    unq_rEmotion_flat_list = list(set(rEmotion_flat_list))
+
+    result = {"status": 'success', 'rEmotion': rEmotion, 'rEmotion-words': unq_rEmotion_flat_list, 'rEmotion-word-length': len(unq_rEmotion_flat_list)}
+
+    return result
+
+def get_all_rep_emotion_flat_corpora():
+
+    return 'Not Implemented'
+
 
 '''
 Use this cypher query to get the [word object count,r_emotion object] pairs for a word
