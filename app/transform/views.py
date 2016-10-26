@@ -22,3 +22,14 @@ def build_enhanced_rEmotion_similaritiy_object(rEmotion=None):
     result = controllers.build_enhanced_rEmotion_similaritiy_object(rEmotion=rEmotion)
 
     return jsonify(result)
+
+'''
+--
+Returns a frequency distribution for every word in the entire corpora
+'''
+@transform.route('/emotion/all/similarity/all')
+def get_frequency_distribution_across_corpora():
+
+    result = controllers.get_frequency_distribution_across_corpora()
+
+    return result
