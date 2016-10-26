@@ -241,8 +241,6 @@ def get_word_counts_across_corpora(word=None):
 
     query_result = cypher.execute(query)
 
-    print query_result
-
     return {'status': 'success', 'word': word, 'emotion-count': len(query_result)}
 
 
