@@ -49,7 +49,7 @@ def get_all_rep_emotion_flat_corpora():
 
     result = controllers.get_all_rep_emotion_flat_corpora()
 
-    return result
+    return jsonify(result)
 
 @extract.route('/emotion/<rEmotion>/order/all')
 def get_rep_emotion_all(rEmotion=None, order_num=None):
