@@ -28,7 +28,8 @@ from extract.controllers import (get_user_node,
                                    get_experience_node,
                                    get_log_node,
                                    compare_two_orders_for_common_word_list,
-                                   compare_all_orders_for_common_word_list,)
+                                   compare_all_orders_for_common_word_list,
+                                   get_all_rep_emotion_flat_corpora,)
 
 '''
 Helper functions - Create new User/Activity Relationship
@@ -407,3 +408,13 @@ def build_enhanced_rEmotion_similaritiy_object(rEmotion=None):
             'order_2_and_3': order_2_and_3['result'],
             'all_orders': all_orders['result'],
            }
+
+'''
+--
+Returns a frequency distribution for every word in the entire corpora
+'''
+def get_frequency_distribution_across_corpora():
+
+    get_all_rep_emotion_flat_corpora()
+
+    return 'Not Implemented'

@@ -37,6 +37,11 @@ Emotion
 def get_rep_emotion_order(rEmotion=None, order_num=None):
     return jsonify(controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=order_num))
 
+'''
+rEmotion > string
+--
+Retruns a flat list for the emotion as one of the attributes
+'''
 @extract.route('/emotion/<rEmotion>/order/all/flat')
 def get_rEmotion_flat_corpora(rEmotion=None):
 
@@ -44,13 +49,21 @@ def get_rEmotion_flat_corpora(rEmotion=None):
 
     return jsonify(result)
 
+'''
+Returns an object where the words for the corpora are included
+'''
 @extract.route('/emotion/all/order/all/flat')
 def get_all_rep_emotion_flat_corpora():
 
     result = controllers.get_all_rep_emotion_flat_corpora()
 
-    return result
+    return jsonify(result)
 
+'''
+rEmotion > string
+--
+Returns the rEmotion's information stored in the MongoDB store
+'''
 @extract.route('/emotion/<rEmotion>/order/all')
 def get_rep_emotion_all(rEmotion=None, order_num=None):
     order_1 = controllers.get_rep_emotion_order(rEmotion=rEmotion, order_num=1)['result']
