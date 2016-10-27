@@ -32,4 +32,4 @@ def get_frequency_distribution_across_corpora():
 
     result = controllers.get_frequency_distribution_across_corpora()
 
-    return result
+    return jsonify(result)
