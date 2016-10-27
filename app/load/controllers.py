@@ -38,6 +38,7 @@ from transform.controllers import (cnr_user_did_activity,
                                    update_log_node,
                                    transform_affect_dictionary,
                                    transform_rEmotion_word,
+                                   get_frequency_distribution_across_corpora,
                                    cnr_rEmotion_synonymized_by_rEmotion_word)
 
 
@@ -388,6 +389,15 @@ def create_all_rEmotion_corpora():
         print 'Finished Loading: ' + rEmotion
 
     return 'success'
+
+'''
+This loads the graph operated data from neo4j to MongoDB
+'''
+def create_affect_word_frequency_distribution(mongo_db_name=None):
+
+
+    return 'success'
+
 
 
 '''
