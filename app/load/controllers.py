@@ -395,6 +395,15 @@ This loads the graph operated data from neo4j to MongoDB
 '''
 def create_affect_word_frequency_distribution(mongo_db_name=None):
 
+    if mongo_db_name == 'acs':
+        try:
+            affect_corpus_synopsis.db.create_collection('affect-word-frequency')
+        except Exception as e:
+            # TODO: Log to file
+            print 'Tried to create collection: "affect-word-frequency" -- Collection already exists.'
+            pass
+
+    
 
     return 'success'
 
