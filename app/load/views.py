@@ -66,7 +66,7 @@ def create_rEmotion_corpus(rEmotion=None):
 
 # This loads the corpus data from mongo to neo4j
 @load.route('/rEmotion_corpus/all', methods=['POST'])
-def create_all_rEmotion_corpus():
+def create_all_rEmotion_corpora():
     return controllers.create_all_rEmotion_corpora()
 
 
