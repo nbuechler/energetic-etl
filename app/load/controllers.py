@@ -400,10 +400,26 @@ def create_affect_word_frequency_distribution(mongo_db_name=None):
             affect_corpus_synopsis.db.create_collection('affect-word-frequency')
         except Exception as e:
             # TODO: Log to file
-            print 'Tried to create collection: "affect-word-frequency" -- Collection already exists.'
+            print 'Collection already exists.'
+            print 'Tried to create collection: "affect-word-frequency"'
+            print 'Proceeding, not creating another collection'
             pass
 
-    
+    # r1 is the result of the transformation that returns a list of objects
+    '''
+    Each object in r1 looks like this:
+    {
+      "emotion-count": <number> -- 26,
+      "word": <string> -- "boom"
+    }
+    '''
+    r1 = get_frequency_distribution_across_corpora()
+
+    collection = affect_corpus_synopsis.db['affect-word-frequency']
+    for i in r1:
+        # TODO: When upgrading to pymongo v.3++, this method won't work!
+        # It is depricated, but it should be changed to insert_one
+        collection.insert({'x': i})
 
     return 'success'
 
