@@ -421,7 +421,8 @@ def get_frequency_distribution_across_corpora():
     corpora_words = r1['corpora_words']
 
     frequencyDist = []
-    for word in corpora_words:
+    j = 0
+    for word in corpora_words[0:2]:
         # Returns an object that lists information about the number of remotions that contain the word at least once
         # If an remotions contains a word more than once, the count is still only incremented once for that word.
         freqPoint = {'emotion-count': 0, "word": 'NULL'}
@@ -431,6 +432,7 @@ def get_frequency_distribution_across_corpora():
             freqPoint['word'] = r2['word']
 
         frequencyDist.append(freqPoint)
-        print "Finished word: " + word
+        j = j + 1
+        print str(j) + " :Finished word: " + word
 
     return {"result": frequencyDist, "status": 'success'}
