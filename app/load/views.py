@@ -64,9 +64,21 @@ Emotion
 def create_rEmotion_corpus(rEmotion=None):
     return controllers.create_single_rEmotion_corpus(rEmotion=rEmotion)
 
+# This loads the corpus data from mongo to neo4j
 @load.route('/rEmotion_corpus/all', methods=['POST'])
 def create_all_rEmotion_corpus():
     return controllers.create_all_rEmotion_corpora()
+
+
+'''
+Affect-Word Similarty
+'''
+
+# This loads the graph operated data from neo4j to MongoDB
+@load.route('/rEmotion_corpus/frequency_dist/<mongo_db_name>', methods=['POST'])
+def create_affect_word_frequency_distribution(mongo_db_name=None):
+    return controllers.create_affect_word_frequency_distribution(mongo_db_name=mongo_db_name)
+
 
 
 '''

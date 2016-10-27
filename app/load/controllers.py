@@ -38,6 +38,7 @@ from transform.controllers import (cnr_user_did_activity,
                                    update_log_node,
                                    transform_affect_dictionary,
                                    transform_rEmotion_word,
+                                   get_frequency_distribution_across_corpora,
                                    cnr_rEmotion_synonymized_by_rEmotion_word)
 
 
@@ -388,6 +389,44 @@ def create_all_rEmotion_corpora():
         print 'Finished Loading: ' + rEmotion
 
     return 'success'
+
+'''
+This loads the graph operated data from neo4j to MongoDB
+'''
+def create_affect_word_frequency_distribution(mongo_db_name=None):
+
+    if mongo_db_name == 'acs':
+        try:
+            affect_corpus_synopsis.db.create_collection('affect-word-frequency')
+        except Exception as e:
+            # TODO: Log to file
+            print 'Collection already exists.'
+            print 'Tried to create collection: "affect-word-frequency"'
+            print 'Proceeding, not creating another collection'
+            pass
+
+    # r1 is the result of the transformation that returns a list of objects
+    '''
+    Each object in r1 looks like this:
+    {
+      "emotion-count": <number> -- 26,
+      "word": <string> -- "boom"
+    }
+    '''
+    transform_result = get_frequency_distribution_across_corpora()
+    r1 = []
+    if transform_result['status'] == 'success':
+        r1 = transform_result['result']
+
+    collection = affect_corpus_synopsis.db['affect-word-frequency']
+    for i in r1:
+        # TODO: When upgrading to pymongo v.3++, this method won't work!
+        # It is depricated, but it should be changed to insert_one
+        collection.insert({'x': i})
+        print i
+
+    return 'success'
+
 
 
 '''

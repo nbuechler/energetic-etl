@@ -24,12 +24,13 @@ from bson import json_util
 import datetime
 
 from extract.controllers import (get_user_node,
-                                   get_activity_node,
-                                   get_experience_node,
-                                   get_log_node,
-                                   compare_two_orders_for_common_word_list,
-                                   compare_all_orders_for_common_word_list,
-                                   get_all_rep_emotion_flat_corpora,)
+                                 get_activity_node,
+                                 get_experience_node,
+                                 get_log_node,
+                                 compare_two_orders_for_common_word_list,
+                                 compare_all_orders_for_common_word_list,
+                                 get_all_rep_emotion_flat_corpora,
+                                 get_word_counts_across_corpora,)
 
 '''
 Helper functions - Create new User/Activity Relationship
@@ -415,6 +416,21 @@ Returns a frequency distribution for every word in the entire corpora
 '''
 def get_frequency_distribution_across_corpora():
 
-    get_all_rep_emotion_flat_corpora()
+    # Returns an object where the words for the corpora are included
+    r1 = get_all_rep_emotion_flat_corpora()
+    corpora_words = r1['corpora_words']
 
-    return 'Not Implemented'
+    frequencyDist = []
+    for word in corpora_words:
+        # Returns an object that lists information about the number of remotions that contain the word at least once
+        # If an remotions contains a word more than once, the count is still only incremented once for that word.
+        freqPoint = {'emotion-count': 0, "word": 'NULL'}
+        r2 = get_word_counts_across_corpora(word=word)
+        if r2['status'] == 'success':
+            freqPoint['emotion-count'] = r2['emotion-count']
+            freqPoint['word'] = r2['word']
+
+        frequencyDist.append(freqPoint)
+        print "Finished word: " + word
+
+    return {"result": frequencyDist, "status": 'success'}
