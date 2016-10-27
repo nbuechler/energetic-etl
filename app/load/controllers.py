@@ -413,13 +413,17 @@ def create_affect_word_frequency_distribution(mongo_db_name=None):
       "word": <string> -- "boom"
     }
     '''
-    r1 = get_frequency_distribution_across_corpora()
+    transform_result = get_frequency_distribution_across_corpora()
+    r1 = []
+    if transform_result['status'] == 'success':
+        r1 = transform_result['result']
 
     collection = affect_corpus_synopsis.db['affect-word-frequency']
     for i in r1:
         # TODO: When upgrading to pymongo v.3++, this method won't work!
         # It is depricated, but it should be changed to insert_one
         collection.insert({'x': i})
+        print i
 
     return 'success'
 
