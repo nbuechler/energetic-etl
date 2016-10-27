@@ -419,7 +419,7 @@ def create_affect_word_frequency_distribution(mongo_db_name=None):
         r1 = transform_result['result']
 
     j = 0
-    collection = affect_corpus_synopsis.db['test']
+    collection = affect_corpus_synopsis.db['affect-word-frequency']
     for i in r1:
         j = j + 1
         i['insert-number'] = j
