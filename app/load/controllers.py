@@ -21,7 +21,7 @@ import json
 from bson import json_util
 
 # date
-import datetime
+from datetime import datetime
 
 from extract.controllers import (get_user_node,
                                    get_activity_node,
@@ -392,6 +392,7 @@ def create_all_rEmotion_corpora():
 
 '''
 This loads the graph operated data from neo4j to MongoDB
+Takes about 3 hours to run. Woah!
 '''
 def create_affect_word_frequency_distribution(mongo_db_name=None):
 
@@ -418,12 +419,15 @@ def create_affect_word_frequency_distribution(mongo_db_name=None):
     if transform_result['status'] == 'success':
         r1 = transform_result['result']
 
+    j = 0
     collection = affect_corpus_synopsis.db['affect-word-frequency']
     for i in r1:
+        j = j + 1
+        i['insert-number'] = j
+        i['utc'] = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
         # TODO: When upgrading to pymongo v.3++, this method won't work!
         # It is depricated, but it should be changed to insert_one
-        collection.insert({'x': i})
-        print i
+        collection.insert(i)
 
     return 'success'
 
