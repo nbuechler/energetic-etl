@@ -74,6 +74,7 @@ def create_all_rEmotion_corpora():
 Affect-Word Similarty
 '''
 
+# Load Order Similarities - Enriched Order Data for R-Emotion
 @load.route('/rEmotion_corpus/order_similarity/<mongo_db_name>', methods=['POST'])
 def create_enhanced_rEmotion_corpora(mongo_db_name=None):
     return controllers.create_enhanced_rEmotion_corpora(mongo_db_name=mongo_db_name)
