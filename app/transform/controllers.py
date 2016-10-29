@@ -21,7 +21,7 @@ import json
 from bson import json_util
 
 # date
-import datetime
+from datetime import datetime
 
 from extract.controllers import (get_user_node,
                                  get_activity_node,
@@ -408,6 +408,7 @@ def build_enhanced_rEmotion_similaritiy_object(rEmotion=None):
             'order_1_and_3': order_1_and_3['result'],
             'order_2_and_3': order_2_and_3['result'],
             'all_orders': all_orders['result'],
+            'utc' : datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
            }
 
 '''

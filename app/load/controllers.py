@@ -38,6 +38,7 @@ from transform.controllers import (cnr_user_did_activity,
                                    update_log_node,
                                    transform_affect_dictionary,
                                    transform_rEmotion_word,
+                                   build_enhanced_rEmotion_similaritiy_object,
                                    get_frequency_distribution_across_corpora,
                                    cnr_rEmotion_synonymized_by_rEmotion_word)
 
@@ -387,6 +388,47 @@ def create_all_rEmotion_corpora():
     for rEmotion in all_emotions:
         create_single_rEmotion_corpus(rEmotion=rEmotion)
         print 'Finished Loading: ' + rEmotion
+
+    return 'success'
+
+'''
+Load Order Similarities - Enriched Order Data for R-Emotion
+Takes about X hours!
+'''
+def create_enhanced_rEmotion_corpora(mongo_db_name=None):
+
+    if mongo_db_name == 'acs':
+        try:
+            affect_corpus_synopsis.db.create_collection('lingustic-affects-order-similarities')
+        except Exception as e:
+            # TODO: Log to file
+            print 'Collection already exists.'
+            print 'Tried to create collection: "lingustic-affects-order-similarities"'
+            print 'Proceeding, not creating another collection'
+            pass
+
+    '''
+    Each object in r looks like this:
+    {
+      "all_orders": <list_of_words>,
+      "order_1_and_2": <list_of_words>,
+      "order_1_and_3": <list_of_words>,
+      "order_2_and_3": <list_of_words>,
+      "utc": "2016-10-29 03:18:36.779",
+      "word": "anticipation",
+      "status": "success",
+    }
+    '''
+    r = {}
+    collection = affect_corpus_synopsis.db['lingustic-affects-order-similarities']
+    for rEmotion in all_emotions:
+        r = build_enhanced_rEmotion_similaritiy_object(rEmotion=rEmotion)
+        try:
+            del r['status'] # Remove the un-needed status key for the DB
+        except KeyError:
+            pass
+        collection.insert(r) # Insert the result and try it again for the next emotion
+        print 'Finished loading affect similarities for: ' + rEmotion
 
     return 'success'
 
