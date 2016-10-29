@@ -393,7 +393,7 @@ def create_all_rEmotion_corpora():
 
 '''
 Load Order Similarities - Enriched Order Data for R-Emotion
-Takes about X hours!
+Takes about 5.75 hours!
 '''
 def create_enhanced_rEmotion_corpora(mongo_db_name=None):
 
