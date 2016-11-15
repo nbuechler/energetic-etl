@@ -55,6 +55,7 @@ _From a terminal start Neo4j:_
     python app/runserver.py 5000 
   </code>
 </pre>
+
 This contains a port - 5000 - for running local, otherwise it will try to run on the default port - 80 - and that's taken. If you run it on a server instance, such as one on AWS without the port specified, it should running open to the world. That is the usual configuration for deploying code and making it 'live' to the world. But, make sure you are prudent in running the code in the way you want it to run. 
 
 # Scripts folder
@@ -89,9 +90,8 @@ _DO NOT UPGRADE PIP_ from 6.1.1 on a standard AWS EC2 instance, or it will bite 
 * DONE: Include code for making the ETL work for 'speedy-affect-scorer'
 
 # Fun Facts
-* As of 2016.Oct.15 -> On my machine, http://<root>/load/rEmotion_corpus/all took <b><i>7336244ms</i></b> or 2 hr. 2 min. 16 sec. 244 ms where 1 hr. = 3600000 ms
+* As of 2016.Oct.15 -> On my machine, http://-root-/load/rEmotion_corpus/all took <b><i>7336244ms</i></b> or 2 hr. 2 min. 16 sec. 244 ms where 1 hr. = 3600000 ms
 * Other research begins to support the idea of an I-EMOTION: http://nymag.com/scienceofus/2016/10/this-personality-trait-makes-it-hard-to-understand-symptoms.html?mid=facebook_scienceofus
-
 
 # CORS and dealing with it
 Make sure to pay attention to how CORS right now accepts everything.
