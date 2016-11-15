@@ -14,25 +14,47 @@ Its primary function is running extract-transform-load mechanisms, of which, are
 
 # Getting Started
 * First, install virtualenv if not done so already -- https://virtualenv.pypa.io/en/latest/installation.html(https://virtualenv.pypa.io/en/latest/installation.html)
-* Then, run this command: $ virtualenv venv
-* (make sure you get the'.'): $ . venv/bin/activate
-* pip install -r requirements.txt
+* Then, run this command: 
+<pre>
+  <code>
+    $ virtualenv venv
+  </code>
+</pre>
+* Next, activate the virtual environment (make sure you get the'.'): 
+<pre>
+  <code>
+    $ . venv/bin/activate
+  </code>
+</pre>
+* Last, install the requirements with pip:
+<pre>
+  <code>
+    $ pip install -r requirements.txt
+  </code>
+</pre>
+
 
 # Start databases - if they are not already running
 _From a terminal, start mongo:_
-'''
-mongod
-'''
+<pre>
+  <code>
+    mongod
+  </code>
+</pre>
 
 _From a terminal start Neo4j:_
-'''
-sudo /etc/init.d/neo4j-service start
-'''
+<pre>
+  <code>
+    sudo /etc/init.d/neo4j-service start
+  </code>
+</pre>
 
 # Run the application
-'''
-python app/runserver.py 5000 
-'''
+<pre>
+  <code>
+    python app/runserver.py 5000 
+  </code>
+</pre>
 This contains a port - 5000 - for running local, otherwise it will try to run on the default port - 80 - and that's taken. If you run it on a server instance, such as one on AWS without the port specified, it should running open to the world. That is the usual configuration for deploying code and making it 'live' to the world. But, make sure you are prudent in running the code in the way you want it to run. 
 
 # Scripts folder
@@ -75,10 +97,13 @@ _DO NOT UPGRADE PIP_ from 6.1.1 on a standard AWS EC2 instance, or it will bite 
 Make sure to pay attention to how CORS right now accepts everything.
 
 See more here: https://flask-cors.readthedocs.org/en/latest/
-'''
-from flask.ext.cors import CORS
-cors = CORS(app, resources={r"/\*": {"origins": "\*"}}) #CORS :WARNING everything!
-'''
+
+<pre>
+  <code>
+    from flask.ext.cors import CORS
+    cors = CORS(app, resources={r"/\*": {"origins": "\*"}}) #CORS :WARNING everything!
+  </code>
+</pre>
 
 # LICENSE
 GPLv3
