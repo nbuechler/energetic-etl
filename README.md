@@ -55,8 +55,6 @@ _DO NOT UPGRADE PIP_ from 6.1.1 on a standard AWS EC2 instance, or it will bite 
 * wheel==0.24.0
 * WTForms==2.0.2
 
--->https://flask-cors.readthedocs.org/en/latest/
-
 # Things to do
 * Refactor: (Bonus points if there is a command line interface -- like click pip module)
 * Plan: Figure out where to store machine learning results: i.e. what kind of database?
@@ -75,9 +73,11 @@ _DO NOT UPGRADE PIP_ from 6.1.1 on a standard AWS EC2 instance, or it will bite 
 
 # CORS and dealing with it
 Make sure to pay attention to how CORS right now accepts everything.
+
+See more here: https://flask-cors.readthedocs.org/en/latest/
 '''
 from flask.ext.cors import CORS
-cors = CORS(app, resources={r"/*": {"origins": "*"}}) #CORS :WARNING everything!
+cors = CORS(app, resources={r"/\*": {"origins": "\*"}}) #CORS :WARNING everything!
 '''
 
 # LICENSE
