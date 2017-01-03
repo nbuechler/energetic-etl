@@ -10,7 +10,7 @@ from config.databases import (mongo1,
                               remoteDB1,
                               secure_graph1)
 
-# mongo dependecies
+# mongo dependencies
 from flask.ext.pymongo import ObjectId
 
 # neo4j dependecies
