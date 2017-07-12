@@ -352,3 +352,13 @@ def compare_all_orders_for_common_word_list(rEmotion=None):
     print '--Finished all words--'
 
     return {'status': 'success', 'result': result}
+
+'''
+This method find the affect/orders for a given word
+MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word)
+WHERE a.name = 'emotion'
+RETURN n.name + ' ' + a.order
+'''
+def find_all_affect_orders_for_a_given_word():
+
+    return 'Not Implemented'
