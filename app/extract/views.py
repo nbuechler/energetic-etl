@@ -60,6 +60,16 @@ def get_all_rep_emotion_flat_corpora():
     return jsonify(result)
 
 '''
+Returns an object where the affect/orders objects for all given words are in a list
+'''
+@extract.route('/emotion/all/order/all/pairing/1')
+def find_all_affect_orders_for_all_given_words():
+
+    result = controllers.find_all_affect_orders_for_all_given_words()
+
+    return jsonify(result)
+
+'''
 rEmotion > string
 --
 Returns the rEmotion's information stored in the MongoDB store
