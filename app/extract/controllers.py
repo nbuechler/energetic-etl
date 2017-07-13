@@ -354,11 +354,50 @@ def compare_all_orders_for_common_word_list(rEmotion=None):
     return {'status': 'success', 'result': result}
 
 '''
-This method find the affect/orders for a given word
+This method finds the affect/orders for all given words
 MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word)
 WHERE a.name = 'emotion'
 RETURN n.name + ' ' + a.order
+===
+Note: Due to time constraints, I didn't make the simpler find_all_affect_orders_for_a_single_given_word
+Note: compare_all_orders_for_common_word_list is similar to what would be find_single_affect_order_for_a_all_given_words
 '''
-def find_all_affect_orders_for_a_given_word():
+def find_all_affect_orders_for_all_given_words():
 
-    return 'Not Implemented'
+    word_list_result = get_all_rep_emotion_flat_corpora()
+
+    lists_of_word_affect_order_objects = []
+    word_count = 0
+    for word in word_list_result['corpora_words'][0:100]:
+        word_count += 1
+        list_of_rEmotion_orders = []
+        cypher = secure_graph1.cypher
+
+        query = ''
+        m = 'MATCH (n:rEmotion) -[r:SYNONYMIZED_BY]-(a:Word)'
+        w = 'WHERE a.name = "'+ word +'"'
+        r = 'RETURN n.name + " " + a.order'
+
+        # Assembled query
+        query = m + w + r
+
+        query_result = cypher.execute(query)
+        # print query_result
+        # TODO: Use the python logging library instead of print statements.
+        print 'Finished: =====' + word + '====='
+        if word_count % 50 == 0:
+            print 'Completed - ' + str(word_count)
+
+        for i in query_result:
+            list_of_rEmotion_orders += i
+        affect_order_word_object = {
+            "word": word,
+            "list_of_rEmotion_orders": list_of_rEmotion_orders,
+        }
+        lists_of_word_affect_order_objects.append(affect_order_word_object)
+
+    return {
+        'status': 'success',
+        'result': lists_of_word_affect_order_objects,
+        'length_of_affect_order_objects_list': len(lists_of_word_affect_order_objects),
+        }
