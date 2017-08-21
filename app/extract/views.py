@@ -64,8 +64,16 @@ Returns an object where the affect/orders objects for all given words are in a l
 '''
 @extract.route('/emotion/all/order/all/pairing/1')
 def find_all_affect_orders_for_all_given_words():
-
     result = controllers.find_all_affect_orders_for_all_given_words()
+
+    return jsonify(result)
+
+'''
+Returns an object where affect lengths are in a list [<affect>-<num>, <length_of_corpus>]
+'''
+@extract.route('/emotion/all/order/all/pairing/2')
+def find_all_order_lengths_for_all_given_affects():
+    result = controllers.find_all_order_lengths_for_all_given_affects()
 
     return jsonify(result)
 
