@@ -1,3 +1,5 @@
+import json, csv, os
+
 from flask import Blueprint
 from flask import render_template, redirect, url_for, jsonify
 
@@ -17,17 +19,21 @@ from flask.ext.pymongo import ObjectId
 from py2neo import Node, Relationship, Path
 
 # bson
-import json
 from bson import json_util
 
 # date
 from datetime import datetime
 
+utc = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+utc_datetime = datetime.utcnow()
+
 from extract.controllers import (get_user_node,
                                    get_activity_node,
                                    get_experience_node,
                                    get_log_node,
-                                   get_rep_emotion_order)
+                                   get_rep_emotion_order,
+                                   find_all_affect_orders_for_all_given_words,
+                                   find_all_order_lengths_for_all_given_affects)
 
 from transform.controllers import (cnr_user_did_activity,
                                    cnr_user_experienced_experience,
@@ -667,3 +673,51 @@ def create_event_supplement():
                 secure_graph1.create(event_includes_log)
 
     return 'success'
+
+'''
+Builds a csv output, one could argue also transforming the json, and saving the csv
+from the result of the json returned from find_all_affect_orders_for_all_given_words()
+'''
+def build_csv_paring_01():
+    r = find_all_affect_orders_for_all_given_words()
+    result = r['result']
+
+    print '=== Starting writing CSV ==='
+    csv_file = open(os.path.dirname(__file__) + '/../../data/' + 'pairing_01' + '(' + utc + ')' + '.csv', 'w')
+    csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
+    i = 1
+    for item in result:
+        print 'i: ' + str(i)
+        csv_writer.writerow([
+            item['word'],
+            [str(r) for r in item['list_of_rEmotion_orders']]
+            ])
+        i += 1
+    csv_file.close()
+    print '=== Finished writing CSV ==='
+
+    return 'Success'
+
+'''
+Builds a csv output, one could argue also transforming the json, and saving the csv
+from the result of the json returned from find_all_affect_orders_for_all_given_words()
+'''
+def build_csv_paring_02():
+    r = find_all_order_lengths_for_all_given_affects()
+    result = r['result']
+
+    print '=== Starting writing CSV ==='
+    csv_file = open(os.path.dirname(__file__) + '/../../data/' + 'pairing_02' + '(' + utc + ')' + '.csv', 'w')
+    csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
+    i = 1
+    for item in result:
+        print 'i: ' + str(i)
+        csv_writer.writerow([
+            item,
+            result[item]
+            ])
+        i += 1
+    csv_file.close()
+    print '=== Finished writing CSV ==='
+
+    return 'Success'

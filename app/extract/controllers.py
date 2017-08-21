@@ -368,7 +368,7 @@ def find_all_affect_orders_for_all_given_words():
 
     lists_of_word_affect_order_objects = []
     word_count = 0
-    for word in word_list_result['corpora_words'][0:100]:
+    for word in word_list_result['corpora_words']:
         word_count += 1
         list_of_rEmotion_orders = []
         cypher = secure_graph1.cypher
@@ -400,4 +400,34 @@ def find_all_affect_orders_for_all_given_words():
         'status': 'success',
         'result': lists_of_word_affect_order_objects,
         'length_of_affect_order_objects_list': len(lists_of_word_affect_order_objects),
+        }
+
+'''
+This method finds the affect/orders for all given words
+MATCH (n:rEmotion) RETURN n.name, n.order1Length, n.order2Length, n.order3Length
+===
+Note: I don't get order intersections.
+'''
+def find_all_order_lengths_for_all_given_affects():
+    cypher = secure_graph1.cypher
+
+    query = ''
+    m = 'MATCH (n:rEmotion) RETURN n.name, n.order1Length, n.order2Length, n.order3Length'
+    w = ''
+    r = ''
+
+    # Assembled query
+    query = m + w + r
+
+    query_result = cypher.execute(query)
+
+    lists_of_word_affect_length_key_values = {}
+    for item in query_result:
+        lists_of_word_affect_length_key_values[item[0] + ' 1'] = item[1]
+        lists_of_word_affect_length_key_values[item[0] + ' 2'] = item[2]
+        lists_of_word_affect_length_key_values[item[0] + ' 3'] = item[3]
+
+    return {
+        'status': 'success',
+        'result': lists_of_word_affect_length_key_values,
         }

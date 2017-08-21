@@ -69,6 +69,27 @@ def create_rEmotion_corpus(rEmotion=None):
 def create_all_rEmotion_corpora():
     return controllers.create_all_rEmotion_corpora()
 
+'''
+first column: single word per cell, all words in the corpora
+
+second column: list of all corpora-and-tier combinations each word is found in.
+Format preferred to be: 'consternation 1, determination 1, determination 3' etc.
+'''
+# This loads the corpus data from mongo from a CSV to a JSON file, give pairing 01
+@load.route('/rEmotion_corpus/pairing/01', methods=['GET'])
+def build_csv_paring_01():
+    return controllers.build_csv_paring_01()
+
+'''
+First column: corpora-and-tier, one per cell, formatted as in the vocab csv
+
+Second column: length of words in corpora.
+'''
+# This loads the corpus data from mongo from a CSV to a JSON file, give pairing 01
+@load.route('/rEmotion_corpus/pairing/02', methods=['GET'])
+def build_csv_paring_02():
+    return controllers.build_csv_paring_02()
+
 
 '''
 Affect-Word Similarty
