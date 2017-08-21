@@ -368,7 +368,7 @@ def find_all_affect_orders_for_all_given_words():
 
     lists_of_word_affect_order_objects = []
     word_count = 0
-    for word in word_list_result['corpora_words'][0:10]:
+    for word in word_list_result['corpora_words']:
         word_count += 1
         list_of_rEmotion_orders = []
         cypher = secure_graph1.cypher
